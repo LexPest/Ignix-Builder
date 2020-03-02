@@ -19,3 +19,8 @@ Once this is done, you should be able to click the little gear icon to the left 
 It should build without errors. You can then find the executable by navigating to the "minimal" folder and then one step further into the folder named: cmake-build-debug.
 
 Double-click the icon and the minimal project will run.
+
+==================== WINDOWS ================
+
+1) Build the wxWidgets solution in VS (remember VS version)
+2) Set the same VS version build tools as compiler and linker [in CLion]

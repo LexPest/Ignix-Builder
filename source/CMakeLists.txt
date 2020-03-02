@@ -3,8 +3,21 @@ project(Nerp-Builder)
 
 set(CMAKE_CXX_STANDARD 14)
 
+SET(CMAKE_FIND_LIBRARY_PREFIXES "")
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
+
+include_directories(${WinSDK})
+
+set (wxWidgets_CONFIGURATION mswu)
 # Request the required wxWidgets libs
-find_package(wxWidgets 3.0.4 COMPONENTS all REQUIRED)
+find_package(wxWidgets COMPONENTS scintilla richtext media webview core base net qa propgrid ribbon gl adv html xml xrc aui stc REQUIRED)
+
+set (wxUSE_UNICODE 1)
+set (UNICODE 1)
+
+add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+add_definitions(-DUNICODE -D_UNICODE)
 
 # Include the wxWidgets use file to initialize various settings
 include(${wxWidgets_USE_FILE})
@@ -16,6 +29,7 @@ set(SRC_FILES
         propgrid.h
         sampleprops.cpp
         sampleprops.h
+        tests.cpp
         )
 
 if(WIN32)
@@ -38,4 +52,6 @@ if(APPLE)
             #MACOSX_BUNDLE_COPYRIGHT "Copyright wxWidgets"
             MACOSX_BUNDLE_GUI_IDENTIFIER "com.nerpengine.builder"
             )
+else()
+    #set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_OPTIONS "-m32" LINK_FLAGS "-m32")
 endif()
