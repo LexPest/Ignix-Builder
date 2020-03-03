@@ -10,7 +10,7 @@ include_directories(${WinSDK})
 
 set (wxWidgets_CONFIGURATION mswu)
 # Request the required wxWidgets libs
-find_package(wxWidgets COMPONENTS scintilla richtext media webview core base net qa propgrid ribbon gl adv html xml xrc aui stc REQUIRED)
+find_package(wxWidgets COMPONENTS scintilla richtext media webview core base net qa propgrid ribbon gl adv html xml xrc aui stc jpeg png REQUIRED)
 
 set (wxUSE_UNICODE 1)
 set (UNICODE 1)
@@ -24,12 +24,16 @@ include(${wxWidgets_USE_FILE})
 
 # Define a variable containing a list of source files for the project
 set(SRC_FILES
-        propgrid_minimal.cpp
-        propgrid.cpp
-        propgrid.h
-        sampleprops.cpp
-        sampleprops.h
-        tests.cpp
+        # propgrid_minimal.cpp
+       # propgrid.cpp
+       # propgrid.h
+       # sampleprops.cpp
+       # sampleprops.h
+       # tests.cpp
+        nbApp.cpp
+        nbApp.h
+        nbForms.cpp
+        nbForms.h
         )
 
 if(WIN32)
