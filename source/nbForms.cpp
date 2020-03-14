@@ -15,7 +15,7 @@
 
 nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxSize( 850,530 ), wxDefaultSize );
+	//this->SetSizeHints( wxSize( 850,530 ), wxDefaultSize );
 	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_MENU ) );
 
 	m_menubar1 = new wxMenuBar( 0 );

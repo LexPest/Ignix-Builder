@@ -64,7 +64,8 @@ class nbFormMain : public wxFrame
 
 	public:
 
-		nbFormMain( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Nerp-Builder GUI"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 857,530 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		nbFormMain( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Nerp-Builder GUI"),
+		        const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 857,530 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL|wxFRAME_EX_METAL );
 
 		~nbFormMain();
 
