@@ -9,16 +9,65 @@
 
 #include "res/noun_Error_1965707.png.h"
 #include "res/noun_Seal_N3E.png.h"
-#include "res/noun_build_1178847.png.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
 nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	//this->SetSizeHints( wxSize( 850,530 ), wxDefaultSize );
-	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_MENU ) );
+	this->SetSizeHints( wxSize( 850,530 ), wxDefaultSize );
+	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_APPWORKSPACE ) );
 
 	m_menubar1 = new wxMenuBar( 0 );
+	m_menu5 = new wxMenu();
+	m_menubar1->Append( m_menu5, wxT("About") );
+
+	m_menu4 = new wxMenu();
+	wxMenuItem* m_menuItem9;
+	m_menuItem9 = new wxMenuItem( m_menu4, wxID_ANY, wxString( wxT("✪ Update&Merge Project Templates") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu4->Append( m_menuItem9 );
+
+	m_menubar1->Append( m_menu4, wxT("✪ Dev") );
+
+	m_menu2 = new wxMenu();
+	wxMenuItem* m_menuItem1;
+	m_menuItem1 = new wxMenuItem( m_menu2, wxID_ANY, wxString( wxT("Template Recipe 1") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu2->Append( m_menuItem1 );
+
+	wxMenuItem* m_menuItem2;
+	m_menuItem2 = new wxMenuItem( m_menu2, wxID_ANY, wxString( wxT("Template Recipe 2") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu2->Append( m_menuItem2 );
+
+	wxMenuItem* m_menuItem3;
+	m_menuItem3 = new wxMenuItem( m_menu2, wxID_ANY, wxString( wxT("...") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu2->Append( m_menuItem3 );
+
+	m_menubar1->Append( m_menu2, wxT("New Recipe From Template") );
+
+	m_menu1 = new wxMenu();
+	wxMenuItem* m_menuItem4;
+	m_menuItem4 = new wxMenuItem( m_menu1, wxID_ANY, wxString( wxT("Save") ) + wxT('\t') + wxT("CTRL+S"), wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_menuItem4 );
+
+	wxMenuItem* m_menuItem5;
+	m_menuItem5 = new wxMenuItem( m_menu1, wxID_ANY, wxString( wxT("Save As...") ) + wxT('\t') + wxT("CTRL+SHIFT+S"), wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_menuItem5 );
+
+	m_menu1->AppendSeparator();
+
+	wxMenuItem* m_menuItem6;
+	m_menuItem6 = new wxMenuItem( m_menu1, wxID_ANY, wxString( wxT("User Recipe 1") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_menuItem6 );
+
+	wxMenuItem* m_menuItem7;
+	m_menuItem7 = new wxMenuItem( m_menu1, wxID_ANY, wxString( wxT("User Recipe 2") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_menuItem7 );
+
+	wxMenuItem* m_menuItem8;
+	m_menuItem8 = new wxMenuItem( m_menu1, wxID_ANY, wxString( wxT("...") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_menuItem8 );
+
+	m_menubar1->Append( m_menu1, wxT("Selected Recipe: %NAME%") );
+
 	this->SetMenuBar( m_menubar1 );
 
 	wxBoxSizer* bSizer2;
@@ -58,7 +107,7 @@ nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, 
 
 	bSizer5->Add( m_bitmap2, 0, wxALL, 5 );
 
-	m_staticText1 = new wxStaticText( this, wxID_ANY, wxT("Path to N3E source directory:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText1 = new wxStaticText( this, wxID_ANY, wxT("Path to project source directory:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText1->Wrap( -1 );
 	bSizer5->Add( m_staticText1, 0, wxALIGN_CENTER|wxALL, 5 );
 
@@ -67,12 +116,8 @@ nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, 
 
 	bSizer5->Add( m_dirPicker1, 1, wxALL, 5 );
 
-	m_staticText2 = new wxStaticText( this, wxID_ANY, wxT("Status:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText2->Wrap( -1 );
-	bSizer5->Add( m_staticText2, 0, wxALIGN_CENTER|wxALL, 5 );
-
-	m_bitmap1 = new wxStaticBitmap( this, wxID_ANY, noun_Error_1965707_png_to_wx_bitmap(), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer5->Add( m_bitmap1, 0, wxALL, 5 );
+	m_button2 = new wxButton( this, wxID_ANY, wxT("Do Build"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer5->Add( m_button2, 0, wxALL, 5 );
 
 
 	bSizer2->Add( bSizer5, 0, wxEXPAND, 5 );
@@ -80,21 +125,21 @@ nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxBoxSizer* bSizer6;
 	bSizer6 = new wxBoxSizer( wxHORIZONTAL );
 
-	m_bitmap3 = new wxStaticBitmap( this, wxID_ANY, noun_build_1178847_png_to_wx_bitmap(), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer6->Add( m_bitmap3, 0, wxALL, 5 );
-
-	m_staticText3 = new wxStaticText( this, wxID_ANY, wxT("Path to current N3E build receipt:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText3 = new wxStaticText( this, wxID_ANY, wxT("Welcome to Nerp-Builder. Select the target project source directory, then choose the recipe settings using (upper) application menu."), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText3->Wrap( -1 );
+	m_staticText3->SetFont( wxFont( 10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Lucida Grande") ) );
+
 	bSizer6->Add( m_staticText3, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_filePicker2 = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	bSizer6->Add( m_filePicker2, 1, wxALL, 5 );
+	m_panel2 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	bSizer6->Add( m_panel2, 1, wxEXPAND | wxALL, 5 );
 
-	m_button3 = new wxButton( this, wxID_ANY, wxT("Save Receipt"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer6->Add( m_button3, 0, wxALL, 5 );
+	m_staticText2 = new wxStaticText( this, wxID_ANY, wxT("Status:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2->Wrap( -1 );
+	bSizer6->Add( m_staticText2, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_button2 = new wxButton( this, wxID_ANY, wxT("Build N3E"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer6->Add( m_button2, 0, wxALL, 5 );
+	m_bitmap1 = new wxStaticBitmap( this, wxID_ANY, noun_Error_1965707_png_to_wx_bitmap(), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer6->Add( m_bitmap1, 0, wxALL, 5 );
 
 
 	bSizer2->Add( bSizer6, 0, wxEXPAND, 5 );

@@ -11,13 +11,13 @@
 #include <wx/xrc/xmlres.h>
 #include <wx/string.h>
 #include <wx/menu.h>
+#include <wx/bitmap.h>
+#include <wx/image.h>
+#include <wx/icon.h>
 #include <wx/gdicmn.h>
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
-#include <wx/bitmap.h>
-#include <wx/image.h>
-#include <wx/icon.h>
 #include <wx/propgrid/propgrid.h>
 #include <wx/propgrid/advprops.h>
 #include <wx/richtext/richtextctrl.h>
@@ -26,6 +26,7 @@
 #include <wx/stattext.h>
 #include <wx/filepicker.h>
 #include <wx/button.h>
+#include <wx/panel.h>
 #include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -40,6 +41,10 @@ class nbFormMain : public wxFrame
 
 	protected:
 		wxMenuBar* m_menubar1;
+		wxMenu* m_menu5;
+		wxMenu* m_menu4;
+		wxMenu* m_menu2;
+		wxMenu* m_menu1;
 		wxPropertyGrid* m_propertyGrid9;
 		wxPGProperty* m_propertyGridItem8;
 		wxPGProperty* m_propertyGridItem9;
@@ -54,18 +59,15 @@ class nbFormMain : public wxFrame
 		wxStaticBitmap* m_bitmap2;
 		wxStaticText* m_staticText1;
 		wxDirPickerCtrl* m_dirPicker1;
+		wxButton* m_button2;
+		wxStaticText* m_staticText3;
+		wxPanel* m_panel2;
 		wxStaticText* m_staticText2;
 		wxStaticBitmap* m_bitmap1;
-		wxStaticBitmap* m_bitmap3;
-		wxStaticText* m_staticText3;
-		wxFilePickerCtrl* m_filePicker2;
-		wxButton* m_button3;
-		wxButton* m_button2;
 
 	public:
 
-		nbFormMain( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Nerp-Builder GUI"),
-		        const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 857,530 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL|wxFRAME_EX_METAL );
+		nbFormMain( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Nerp-Builder GUI"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 857,530 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~nbFormMain();
 

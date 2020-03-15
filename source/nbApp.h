@@ -11,6 +11,8 @@
 #include <wx/wx.h>
 #endif
 
+#include "yaml-cpp/yaml.h"
+
 class nbApp : public wxApp {
 public:
     virtual bool OnInit();

@@ -34,6 +34,12 @@ SET(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 # Include the wxWidgets use file to initialize various settings
 include(${wxWidgets_USE_FILE})
 
+# Include static libraries
+link_directories(../include_lib)
+
+# Include additional headers
+include_directories(../include_h)
+
 # Define a variable containing a list of source files for the project
 set(SRC_FILES
         nbApp.cpp
@@ -54,6 +60,7 @@ endif()
 add_executable(${PROJECT_NAME} WIN32 MACOSX_BUNDLE ${SRC_FILES})
 # Link required libraries to the executable
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/../include_lib/libyaml-cpp/libyaml-cpp.a)
 
 if(APPLE)
     set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/../platform/macosx//Info.plist)
