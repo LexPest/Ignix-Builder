@@ -53,7 +53,7 @@ if(WIN32)
     #list(APPEND SRC_FILES ../sample.rc)
 elseif(APPLE)
     # Add an icon for the apple .app file
-    list(APPEND SRC_FILES wxmac.icns)
+    list(APPEND SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/../platform/macosx/NerpaDevIcon.icns)
 endif()
 
 # Define the build target for the executable
@@ -65,10 +65,11 @@ target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/../include_lib/libyaml
 if(APPLE)
     set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/../platform/macosx//Info.plist)
     set_target_properties(${PROJECT_NAME} PROPERTIES
-            RESOURCE "wxmac.icns"
-            MACOSX_BUNDLE_ICON_FILE wxmac.icns
-            MACOSX_BUNDLE_COPYRIGHT "Copyright Nerp"
-            MACOSX_BUNDLE_GUI_IDENTIFIER "com.nerpengine.builder"
+            RESOURCE "${CMAKE_CURRENT_SOURCE_DIR}/../platform/macosx/NerpaDevIcon.icns"
+            # Other params do not matter as now it uses separate Info.plist
+            #MACOSX_BUNDLE_ICON_FILE NerpaDevIcon.icns
+            #MACOSX_BUNDLE_COPYRIGHT "Copyright Nerp"
+            #MACOSX_BUNDLE_GUI_IDENTIFIER "com.nerpengine.builder"
             )
 else()
     #set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_OPTIONS "-m32" LINK_FLAGS "-m32")
