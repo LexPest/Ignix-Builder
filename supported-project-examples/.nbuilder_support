@@ -1,4 +1,5 @@
 version: 0.2
 supported-recipes-iter-act-ver : 1
+project-name : "Test Project"
 last-user-recipe-opened : "undefined"
 default-template-recipe : "undefined"

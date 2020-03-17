@@ -11,14 +11,14 @@
         <property name="embedded_files_path">./../source/res</property>
         <property name="encoding">UTF-8</property>
         <property name="event_generation">connect</property>
-        <property name="file">nbForms</property>
+        <property name="file">nbWxForms</property>
         <property name="first_id">1000</property>
         <property name="help_provider">none</property>
         <property name="indent_with_spaces"></property>
         <property name="internationalize">0</property>
         <property name="name">Nerp-Builder GUI</property>
         <property name="namespace"></property>
-        <property name="path">./../source</property>
+        <property name="path">./../source/wxApplication</property>
         <property name="precompiled_header"></property>
         <property name="relative_path">1</property>
         <property name="skip_lua_events">1</property>
@@ -54,7 +54,7 @@
             <property name="window_name"></property>
             <property name="window_style">wxTAB_TRAVERSAL</property>
             <property name="xrc_skip_sizer">1</property>
-            <object class="wxMenuBar" expanded="1">
+            <object class="wxMenuBar" expanded="0">
                 <property name="bg"></property>
                 <property name="context_help"></property>
                 <property name="context_menu">1</property>

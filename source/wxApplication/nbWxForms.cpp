@@ -5,10 +5,10 @@
 // PLEASE DO *NOT* EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
-#include "nbForms.h"
+#include "nbWxForms.h"
 
-#include "res/noun_Error_1965707.png.h"
-#include "res/noun_Seal_N3E.png.h"
+#include "../res/noun_Error_1965707.png.h"
+#include "../res/noun_Seal_N3E.png.h"
 
 ///////////////////////////////////////////////////////////////////////////
 

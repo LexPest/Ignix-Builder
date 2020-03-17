@@ -1,8 +1,9 @@
 format-version : 0.2
 iteration-version : 1
 name : "Test"
-props : 
-- {type : "string", name : "Prop String Test", emacro: "PROP_TEST_STRING", data : "Test Data"}
-- {type : "checkbox", name : "Dependance Chkbox", emacro: "DEP_CHKBOX_1", data : true, depends_on_name : ["DEP_CHKBOX_2"]}
-- {type : "checkbox", name : "Dependance Chkbox 2", emacro: "DEP_CHKBOX_2", data : true, depends_on_emacro : ["DEP_CHKBOX_3"]}
-- {type : "checkbox", name : "Dependance Chkbox 3", emacro: "DEP_CHKBOX_3", data : true}
+props :
+- {group_name : "Test Group"}
+    - {type : "string", name : "Prop String Test", emacro: "PROP_TEST_STRING", data : "Test Data"}
+    - {type : "checkbox", name : "Dependance Chkbox", emacro: "DEP_CHKBOX_1", data : true, depends_available_on_name : ["DEP_CHKBOX_2"]}
+    - {type : "checkbox", name : "Dependance Chkbox 2", emacro: "DEP_CHKBOX_2", data : true, depends_available_on_emacro : ["DEP_CHKBOX_3"]}
+    - {type : "checkbox", name : "Dependance Chkbox 3", emacro: "DEP_CHKBOX_3", data : true}

@@ -2,8 +2,8 @@
 // Created by LexPest on 03.03.2020.
 //
 
-#ifndef NERP_BUILDER_NBAPP_H
-#define NERP_BUILDER_NBAPP_H
+#ifndef NERP_BUILDER_NBWXAPP_H
+#define NERP_BUILDER_NBWXAPP_H
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -13,11 +13,11 @@
 
 #include "yaml-cpp/yaml.h"
 
-class nbApp : public wxApp {
+class nbWxApp : public wxApp {
 public:
     virtual bool OnInit();
 
 };
 
-wxIMPLEMENT_APP(nbApp);
-#endif //NERP_BUILDER_NBAPP_H
+wxIMPLEMENT_APP(nbWxApp);
+#endif //NERP_BUILDER_NBWXAPP_H

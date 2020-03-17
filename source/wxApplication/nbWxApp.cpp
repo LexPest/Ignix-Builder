@@ -2,10 +2,10 @@
 // Created by LexPest on 03.03.2020.
 //
 
-#include "nbApp.h"
-#include "nbForms.h"
+#include "nbWxApp.h"
+#include "nbWxForms.h"
 
-bool nbApp::OnInit() {
+bool nbWxApp::OnInit() {
     wxInitAllImageHandlers();
     nbFormMain* mainForm = new nbFormMain(NULL);
     mainForm->Show();

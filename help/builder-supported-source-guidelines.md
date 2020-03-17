@@ -14,6 +14,7 @@ Format: __YAML__
 **Fields:**
 * Nerp-Builder Supported Min Version
 * Supported Recipes Iteration Actual Version
+* Target project name 
 * Last User Recipe Opened
 * Default Template Recipe
 * [NOT USED AND NOT INCLUDED] Build Command (CMake) 
@@ -27,11 +28,13 @@ Format: __YAML__
 * Recipe Format Version
 * Recipe Iteration Version
 * Recipe Name
-* *[LIST]* Properties (Recipe Data)
-  * Prop Type
-  * Prop Name
-  * Prop *EMacro* Name
-  * Prop Data
+* *[LIST of LISTS]* Properties (Recipe Data)
+  * Prop Group (Named)
+    * Prop Type
+    * Prop Name
+    * Prop *EMacro* Name
+    * Prop Data
+    * [...]
   * [...]
 
 ***EMacro*** stands for the specific C-style macro definition, that is being edited during pre-build configuration step by Nerp-Builder.
