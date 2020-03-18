@@ -8,10 +8,10 @@
 #include <string>
 #include <list>
 #include <ios>
-#include "../interface/nbIObservable.h"
+#include "../common/interface/IObservable.h"
 #include "../interface/nbIObserverProjectWorker.h"
 
-class nbProjectWorker : public nbIObservable<nbIObserverProjectWorker> {
+class nbProjectWorker : public IObservable<nbIObserverProjectWorker> {
 
 private:
     std::string PathRootFolder;
@@ -20,9 +20,8 @@ private:
     std::string PathRootTemplateRecipes;
     std::string PathRootUserRecipes;
 
-    void Test(){
-        notify()
-    }
+
+
 };
 
 

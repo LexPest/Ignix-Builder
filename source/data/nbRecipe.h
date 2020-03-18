@@ -5,8 +5,8 @@
 #ifndef NERP_BUILDER_NBRECIPE_H
 #define NERP_BUILDER_NBRECIPE_H
 
-#include "../common/Version.h"
-#include "../common/IterVersion.h"
+#include "../common/data/Version.h"
+#include "../common/data/IterVersion.h"
 #include "nbPropertyGroup.h"
 #include "nbERecipeKind.h"
 

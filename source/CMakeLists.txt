@@ -46,7 +46,7 @@ set(SRC_FILES
         wxApplication/nbWxApp.h
         wxApplication/nbWxForms.cpp
         wxApplication/nbWxForms.h
-        data/nbProject.cpp data/nbProject.h common/Version.cpp common/Version.h common/IterVersion.cpp common/IterVersion.h data/nbRecipe.cpp data/nbRecipe.h data/nbPropertyGroup.cpp data/nbPropertyGroup.h data/nbProperty.cpp data/nbProperty.h data/nbEPropertyType.h data/nbERecipeKind.h logic/nbProjectWorker.cpp logic/nbProjectWorker.h interface/nbIObserverProjectWorker.cpp interface/nbIObserverProjectWorker.h interface/nbIObservable.cpp interface/nbIObservable.h)
+        data/nbProject.cpp data/nbProject.h common/data/Version.cpp common/data/Version.h common/data/IterVersion.cpp common/data/IterVersion.h data/nbRecipe.cpp data/nbRecipe.h data/nbPropertyGroup.cpp data/nbPropertyGroup.h data/nbProperty.cpp data/nbProperty.h data/nbEPropertyType.h data/nbERecipeKind.h logic/nbProjectWorker.cpp logic/nbProjectWorker.h interface/nbIObserverProjectWorker.cpp interface/nbIObserverProjectWorker.h common/interface/IObservable.cpp common/interface/IObservable.h)
 
 if(WIN32)
     # Include a RC file for windows

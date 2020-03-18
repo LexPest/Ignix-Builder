@@ -2,25 +2,25 @@
 // Created by Alexey Mihailov on 2020-03-18.
 //
 
-#ifndef NERP_BUILDER_NBIOBSERVABLE_H
-#define NERP_BUILDER_NBIOBSERVABLE_H
+#ifndef NERP_BUILDER_IOBSERVABLE_H
+#define NERP_BUILDER_IOBSERVABLE_H
 
 #include <vector>
 #include <functional>
 
 template <typename TObserver>
-class nbIObservable
+class IObservable
 {
 public:
 
     typedef size_t size_type;
 
-    typedef std::vector<TObserver*> ObserverList;
+    typedef std::vector<std::shared_ptr<TObserver>> ObserverList;
 
     //*****************************************************************
     /// Add an observer to the list.
     //*****************************************************************
-    void AddObserver(TObserver& observer)
+    void AddObserver(std::shared_ptr<TObserver> observer)
     {
         // See if we already have it in our list.
         typename ObserverList::const_iterator i_observer = std::find(observer_list.begin(),
@@ -31,7 +31,7 @@ public:
         if (i_observer == observer_list.end())
         {
             // Add it.
-            observer_list.push_back(&observer);
+            observer_list.push_back(observer);
         }
     }
 
@@ -69,23 +69,12 @@ public:
         return observer_list.size();
     }
 
-    //*****************************************************************
-    /// Notify all of the observers, sending them the notification.
-    /// TNotification is the notification type.
-    //*****************************************************************
-    template <typename TNotification>
-    void NotifyObservers(TNotification n)
-    {
-        for (size_t i = 0; i < observer_list.size(); ++i)
-        {
-            observer_list[i]->Notification(n);
-        }
-    }
 
-private:
+
+protected:
 
     /// The list of observers.
     ObserverList observer_list;
 };
 
-#endif //NERP_BUILDER_NBIOBSERVABLE_H
+#endif //NERP_BUILDER_IOBSERVABLE_H

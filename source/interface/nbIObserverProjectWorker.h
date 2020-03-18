@@ -6,8 +6,11 @@
 #define NERP_BUILDER_NBIOBSERVERPROJECTWORKER_H
 
 
+#include <string>
+
 class nbIObserverProjectWorker {
-    virtual void n_projectLoadDone(bool parSuccess) = 0;
+    virtual void n_projectLoadDone(bool parSuccess, std::string message = "OK") = 0;
+
 };
 
 

@@ -5,8 +5,8 @@
 #ifndef NERP_BUILDER_NBPROJECT_H
 #define NERP_BUILDER_NBPROJECT_H
 
-#include "../common/Version.h"
-#include "../common/IterVersion.h"
+#include "../common/data/Version.h"
+#include "../common/data/IterVersion.h"
 #include "nbRecipe.h"
 #include <string>
 #include <list>

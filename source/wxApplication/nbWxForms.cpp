@@ -73,12 +73,41 @@ nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxBoxSizer* bSizer2;
 	bSizer2 = new wxBoxSizer( wxVERTICAL );
 
+	m_staticText4 = new wxStaticText( this, wxID_ANY, wxT("Enable/Disable Features, select to show Properties:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText4->Wrap( -1 );
+	m_staticText4->SetFont( wxFont( 11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Lucida Grande") ) );
+
+	bSizer2->Add( m_staticText4, 0, wxALL, 2 );
+
 	wxBoxSizer* bSizer3;
 	bSizer3 = new wxBoxSizer( wxHORIZONTAL );
 
+	m_treeListCtrl2 = new wxTreeListCtrl( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTL_CHECKBOX|wxTL_DEFAULT_STYLE );
+	m_treeListCtrl2->AppendColumn( wxT("Feature"), wxCOL_WIDTH_AUTOSIZE, wxALIGN_LEFT, wxCOL_RESIZABLE );
+	m_treeListCtrl2->AppendColumn( wxT("Requires"), wxCOL_WIDTH_AUTOSIZE, wxALIGN_LEFT, wxCOL_RESIZABLE );
+
+	bSizer3->Add( m_treeListCtrl2, 4, wxEXPAND | wxALL, 5 );
+
+	m_richText1 = new wxRichTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0|wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxWANTS_CHARS );
+	m_richText1->SetMinSize( wxSize( 400,200 ) );
+
+	bSizer3->Add( m_richText1, 6, wxEXPAND | wxALL, 5 );
+
+
+	bSizer2->Add( bSizer3, 3, wxEXPAND, 2 );
+
+	m_staticText41 = new wxStaticText( this, wxID_ANY, wxT("Edit selected Feature Properties:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText41->Wrap( -1 );
+	m_staticText41->SetFont( wxFont( 11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Lucida Grande") ) );
+
+	bSizer2->Add( m_staticText41, 0, wxALL, 2 );
+
+	wxBoxSizer* bSizer51;
+	bSizer51 = new wxBoxSizer( wxHORIZONTAL );
+
 	m_propertyGrid9 = new wxPropertyGrid(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxPG_BOLD_MODIFIED|wxPG_DEFAULT_STYLE|wxPG_SPLITTER_AUTO_CENTER|wxTAB_TRAVERSAL);
 	m_propertyGrid9->SetExtraStyle( wxPG_EX_NATIVE_DOUBLE_BUFFERING );
-	m_propertyGrid9->SetMinSize( wxSize( -1,350 ) );
+	m_propertyGrid9->SetMinSize( wxSize( -1,150 ) );
 
 	m_propertyGridItem8 = m_propertyGrid9->Append( new wxPropertyCategory( wxT("Name Cat Test"), wxT("Name Cat Test") ) );
 	m_propertyGridItem9 = m_propertyGrid9->Append( new wxLongStringProperty( wxT("Config Elem 1"), wxT("Config Elem 1") ) );
@@ -89,15 +118,13 @@ nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_propertyGridItem5 = m_propertyGrid9->Append( new wxSystemColourProperty( wxT("Config Elem C"), wxT("Config Elem C") ) );
 	m_propertyGridItem6 = m_propertyGrid9->Append( new wxDirProperty( wxT("Config Elem D"), wxT("Config Elem D") ) );
 	m_propertyGridItem7 = m_propertyGrid9->Append( new wxFileProperty( wxT("Config Elem LS"), wxT("Config Elem LS") ) );
-	bSizer3->Add( m_propertyGrid9, 3, wxALL|wxEXPAND, 5 );
+	bSizer51->Add( m_propertyGrid9, 4, wxALL|wxEXPAND, 5 );
 
-	m_richText1 = new wxRichTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0|wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxWANTS_CHARS );
-	m_richText1->SetMinSize( wxSize( 400,200 ) );
-
-	bSizer3->Add( m_richText1, 4, wxEXPAND | wxALL, 5 );
+	m_richText2 = new wxRichTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0|wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxWANTS_CHARS );
+	bSizer51->Add( m_richText2, 6, wxEXPAND | wxALL, 5 );
 
 
-	bSizer2->Add( bSizer3, 2, wxEXPAND, 5 );
+	bSizer2->Add( bSizer51, 2, wxEXPAND, 2 );
 
 	wxBoxSizer* bSizer5;
 	bSizer5 = new wxBoxSizer( wxHORIZONTAL );

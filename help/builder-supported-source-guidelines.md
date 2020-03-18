@@ -28,13 +28,23 @@ Format: __YAML__
 * Recipe Format Version
 * Recipe Iteration Version
 * Recipe Name
-* *[LIST of LISTS]* Properties (Recipe Data)
-  * Prop Group (Named)
-    * Prop Type
-    * Prop Name
-    * Prop *EMacro* Name
-    * Prop Data
+* *[LIST of LISTS]* Features (Recipe Data)
+  * Feature Name
+  * Feature *EMacro* Name
+  * *[LIST of LISTS, PARENT-CHILD]* Child (Included) Features
     * [...]
-  * [...]
+  *  *[LIST of LISTS]* Properties 
+    * Prop Group (Named)
+      * Prop Type
+      * Prop Name
+      * Prop *EMacro* Name
+      * Prop Data
+      * [...]
+    * [...]
+  * *[LIST]* Dependencies Required
+    * Dependency Entity
+      * Dependency Kind
+      * Dependency Data [...]
+    * [...]
 
 ***EMacro*** stands for the specific C-style macro definition, that is being edited during pre-build configuration step by Nerp-Builder.
