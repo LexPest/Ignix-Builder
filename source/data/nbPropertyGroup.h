@@ -11,7 +11,7 @@
 
 
 struct nbPropertyGroup {
-    std::string Name;
+    std::string CName;
     std::list<std::shared_ptr<nbProperty>> Props;
 
     nbPropertyGroup(const std::string &name);

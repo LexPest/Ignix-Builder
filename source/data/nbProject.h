@@ -11,6 +11,8 @@
 #include <string>
 #include <list>
 
+struct nbRecipe;
+
 struct nbProject {
     Version CVersion;
     IterVersion SupportedRecipesIterActualVersion;

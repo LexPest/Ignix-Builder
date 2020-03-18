@@ -30,6 +30,7 @@ Format: __YAML__
 * Recipe Name
 * *[LIST of LISTS]* Features (Recipe Data)
   * Feature Name
+  * Feature Rich-Text Description
   * Feature *EMacro* Name
   * *[LIST of LISTS, PARENT-CHILD]* Child (Included) Features
     * [...]
@@ -37,6 +38,7 @@ Format: __YAML__
     * Prop Group (Named)
       * Prop Type
       * Prop Name
+      * Prop Rich-Text Description
       * Prop *EMacro* Name
       * Prop Data
       * [...]

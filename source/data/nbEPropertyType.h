@@ -6,7 +6,7 @@
 #define NERP_BUILDER_NBEPROPERTYTYPE_H
 
 
-enum class nbEPropertyType {
+enum class nbEPropertyType : int8_t {
     BoolFlag,
     UnicodeString,
     NumInteger,

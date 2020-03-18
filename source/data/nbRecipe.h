@@ -9,15 +9,18 @@
 #include "../common/data/IterVersion.h"
 #include "nbPropertyGroup.h"
 #include "nbERecipeKind.h"
+#include "nbFeature.h"
 
 #include <string>
 #include <list>
+
+struct nbFeature;
 
 struct nbRecipe {
     Version FormatVersion;
     IterVersion IterationVersion;
     std::string Name;
-    std::list<std::shared_ptr<nbPropertyGroup>> PropGroups;
+    std::list<std::shared_ptr<nbFeature>> FeaturesRoot;
 
     nbERecipeKind CKind;
 

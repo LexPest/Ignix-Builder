@@ -4,4 +4,4 @@
 
 #include "nbPropertyGroup.h"
 
-nbPropertyGroup::nbPropertyGroup(const std::string &name) : Name(name) {}
+nbPropertyGroup::nbPropertyGroup(const std::string &name) : CName(name) {}
