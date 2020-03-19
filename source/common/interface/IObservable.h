@@ -23,33 +23,41 @@ public:
     void AddObserver(std::shared_ptr<TObserver> observer)
     {
         // See if we already have it in our list.
-        typename ObserverList::const_iterator i_observer = std::find(observer_list.begin(),
+        /*
+        auto i_observer = std::find(observer_list.begin(),
                                                                      observer_list.end(),
                                                                      &observer);
 
         // Not there?
         if (i_observer == observer_list.end())
-        {
+        {*/
             // Add it.
             observer_list.push_back(observer);
-        }
+        //}
     }
 
     //*****************************************************************
     /// Remove a particular observer from the list.
     //*****************************************************************
-    void RemoveObserver(TObserver& observer)
+    void RemoveObserver(std::shared_ptr<TObserver> observer)
     {
         // See if we have it in our list.
-        typename ObserverList::iterator i_observer = std::find(observer_list.begin(),
+/*
+        auto i_observer = std::find(observer_list.begin(),
                                                                observer_list.end(),
                                                                &observer);
 
         // Found it?
         if (i_observer != observer_list.end())
-        {
+        {*/
             // Erase it.
-            observer_list.erase(i_observer);
+           // observer_list.erase(i_observer);
+        //}
+
+        for (int i = 0; i < observer_list.size(); i++){
+            if (observer_list[i] == observer){
+                observer_list.erase(i);
+            }
         }
     }
 

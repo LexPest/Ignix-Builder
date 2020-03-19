@@ -11,6 +11,8 @@
 #include "../common/interface/IObservable.h"
 #include "../interface/nbIObserverProjectWorker.h"
 
+class nbIObserverProjectWorker;
+
 class nbProjectWorker : public IObservable<nbIObserverProjectWorker> {
 
 private:

@@ -7,8 +7,13 @@
 
 
 #include <string>
+#include "../common/interface/ILinkedObserver.h"
+#include "../logic/nbProjectWorker.h"
 
-class nbIObserverProjectWorker {
+class nbProjectWorker;
+
+class nbIObserverProjectWorker  {
+public:
     virtual void n_projectLoadDone(bool parSuccess, std::string message = "OK") = 0;
 
 };

@@ -4,10 +4,21 @@
 
 #include "nbWxApp.h"
 #include "nbWxForms.h"
+#include "nbWxAppWorkers.h"
+#include <wx/sharedptr.h>
+
+std::shared_ptr<nbWxObserverProjectWorker> nbWxAppWorkers::MProjectWorker;
+wxWeakRef<nbFormMain> nbWxAppWorkers::MMainForm;
 
 bool nbWxApp::OnInit() {
     wxInitAllImageHandlers();
-    nbFormMain* mainForm = new nbFormMain(NULL);
-    mainForm->Show();
+    //nbFormMain* mainForm = new nbFormMain(NULL);
+    //std::shared_ptr<nbFormMain> mainForm = std::make_shared<nbFormMain>(NULL);
+    nbWxAppWorkers::MMainForm = new nbFormMain(NULL);
+    std::shared_ptr<nbProjectWorker> projectWorkerMain = std::make_shared<nbProjectWorker>();
+    nbWxAppWorkers::MProjectWorker = std::make_shared<nbWxObserverProjectWorker>(projectWorkerMain, nbWxAppWorkers::MMainForm);
+    nbWxAppWorkers::MProjectWorker->InitObserver(nbWxAppWorkers::MProjectWorker);
+
+    nbWxAppWorkers::MMainForm->Show();
     return true;
 }

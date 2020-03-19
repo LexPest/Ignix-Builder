@@ -12,6 +12,7 @@
 #endif
 
 #include "yaml-cpp/yaml.h"
+#include <memory>
 
 class nbWxApp : public wxApp {
 public:
