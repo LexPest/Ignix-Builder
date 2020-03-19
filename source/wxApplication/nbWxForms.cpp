@@ -176,8 +176,14 @@ nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, 
 	this->Layout();
 
 	this->Centre( wxBOTH );
+
+	// Connect Events
+	m_dirPicker1->Connect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( nbFormMain::sourceDirChanged ), NULL, this );
 }
 
 nbFormMain::~nbFormMain()
 {
+	// Disconnect Events
+	m_dirPicker1->Disconnect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( nbFormMain::sourceDirChanged ), NULL, this );
+
 }

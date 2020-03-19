@@ -46,7 +46,6 @@ class nbFormMain : public wxFrame
 		wxMenu* m_menu4;
 		wxMenu* m_menu2;
 		wxMenu* m_menu1;
-		wxStaticText* m_staticText4;
 		wxTreeListCtrl* m_treeListCtrl2;
 		wxRichTextCtrl* m_richText1;
 		wxStaticText* m_staticText41;
@@ -70,7 +69,12 @@ class nbFormMain : public wxFrame
 		wxStaticText* m_staticText2;
 		wxStaticBitmap* m_bitmap1;
 
+		// Virtual event handlers, overide them in your derived class
+		virtual void sourceDirChanged( wxFileDirPickerEvent& event ) { event.Skip(); }
+
+
 	public:
+		wxStaticText* m_staticText4;
 
 		nbFormMain( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Nerp-Builder GUI"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 857,749 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 

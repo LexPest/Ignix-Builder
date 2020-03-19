@@ -9,12 +9,14 @@
 #include <string>
 #include "../common/interface/ILinkedObserver.h"
 #include "../logic/nbProjectWorker.h"
+#include <memory>
+#include "../data/nbOpenedProjectHandler.h"
 
 class nbProjectWorker;
 
 class nbIObserverProjectWorker  {
 public:
-    virtual void n_projectLoadDone(bool parSuccess, std::string message = "OK") = 0;
+    virtual void n_callback_projectLoadDone(bool parIsSuccess, std::shared_ptr<nbOpenedProjectHandler> parProjectHandler, std::string message = "OK") = 0;
 
 };
 

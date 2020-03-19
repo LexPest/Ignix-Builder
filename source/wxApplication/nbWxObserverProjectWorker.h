@@ -8,18 +8,27 @@
 
 #include "../interface/nbIObserverProjectWorker.h"
 #include "nbWxForms.h"
+#include "nbFormMainExt.h"
 #include <wx/sharedptr.h>
+#include <future>
 
 class nbWxObserverProjectWorker : public nbIObserverProjectWorker, public ILinkedObserver<nbProjectWorker, nbIObserverProjectWorker> {
 public:
 
     nbWxObserverProjectWorker(const std::shared_ptr<nbProjectWorker> &linkedObservable,
-                              const wxWeakRef<nbFormMain> &linkedForm);
+                              const wxWeakRef<nbFormMainExt> &linkedForm);
 
-    void n_projectLoadDone(bool parSuccess, std::string message) override;
+    void n_callback_projectLoadDone(bool parIsSuccess, std::shared_ptr<nbOpenedProjectHandler> parProjectHandler,
+                                    std::string message) override;
+
+    void start_loadProject();
+
 private:
-    wxWeakRef<nbFormMain> linkedForm;
+    wxWeakRef<nbFormMainExt> linkedForm;
 
+    std::future<void> F_ProjectLoading;
+
+    void formChangeVal();
 };
 
 

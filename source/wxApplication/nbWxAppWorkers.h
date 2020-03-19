@@ -7,11 +7,12 @@
 
 #include <wx/sharedptr.h>
 #include "nbWxObserverProjectWorker.h"
+#include "nbFormMainExt.h"
 
 class nbWxAppWorkers {
 public:
     static std::shared_ptr<nbWxObserverProjectWorker> MProjectWorker;
-    static wxWeakRef<nbFormMain> MMainForm;
+    static wxWeakRef<nbFormMainExt> MMainForm;
 };
 
 

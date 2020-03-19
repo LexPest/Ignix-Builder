@@ -15,12 +15,7 @@ class nbIObserverProjectWorker;
 
 class nbProjectWorker : public IObservable<nbIObserverProjectWorker> {
 
-private:
-    std::string PathRootFolder;
-    std::string PathNBuilderSupport;
-    std::string PathNBuilderBuildMacro;
-    std::string PathRootTemplateRecipes;
-    std::string PathRootUserRecipes;
+
 
 
 
