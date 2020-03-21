@@ -1,7 +1,23 @@
 cmake_minimum_required(VERSION 3.12)
 project(Nerp-Builder)
 
+# AVAILABLE CONFIGS:
+# Debug
+# Release
+# ReleaseDistrib
+
+
 set(CMAKE_CXX_STANDARD 14)
+
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    message(" ")
+    message("CMAKE IN DEBUG MODE")
+    message(" ")
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    message(" ")
+    message("CMAKE IN RELEASE MODE")
+    message(" ")
+endif ()
 
 if (WIN32)
     message("Building on Win32")
@@ -73,4 +89,28 @@ if(APPLE)
             )
 else()
     #set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_OPTIONS "-m32" LINK_FLAGS "-m32")
+endif()
+
+
+if (CMAKE_BUILD_TYPE MATCHES ReleaseDistrib)
+    if (APPLE)
+        message("Libraries distribution with release build set on supported Apple platform")
+
+       add_custom_command(
+               TARGET ${PROJECT_NAME}
+               POST_BUILD
+               COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target install
+       )
+
+       SET( APPS "\${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app" ) # paths to executables
+       SET( DIRS "${CMAKE_PREFIX_PATH}/lib" ) # directories to search for prerequisites
+       INSTALL( CODE "
+            include(BundleUtilities)
+            set(BU_CHMOD_BUNDLE_ITEMS TRUE)
+            fixup_bundle(\"${APPS}\" \"\" \"${DIRS}\")
+        ")
+
+    else()
+        message("Libraries distribution with release build not set (unsupported platform)!")
+    endif()
 endif()
