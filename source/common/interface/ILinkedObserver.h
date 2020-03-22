@@ -1,5 +1,5 @@
 //
-// Created by Alexey Mihailov on 2020-03-19.
+// Created by Alexey Mihailov
 //
 
 #ifndef NERP_BUILDER_ILINKEDOBSERVER_H
@@ -7,7 +7,6 @@
 
 #include <memory>
 #include "IObservable.h"
-#include "../../interface/nbIObserverProjectWorker.h"
 
 template <typename TObserver>
 class IObservable;

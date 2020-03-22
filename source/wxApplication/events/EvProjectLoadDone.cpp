@@ -1,5 +1,5 @@
 //
-// Created by Alexey Mihailov on 2020-03-20.
+// Created by Alexey Mihailov
 //
 
 #include "EvProjectLoadDone.h"

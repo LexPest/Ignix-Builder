@@ -1,5 +1,5 @@
 //
-// Created by Alexey Mihailov on 2020-03-19.
+// Created by Alexey Mihailov
 //
 
 #ifndef NERP_BUILDER_NBOPENEDPROJECTHANDLER_H

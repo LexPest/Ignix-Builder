@@ -2,4 +2,4 @@
 // Created by Alexey Mihailov
 //
 
-#include "ILinkedObserver.h"
+#include "nbWxProjectOpenedSimple.h"

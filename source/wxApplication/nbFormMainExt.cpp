@@ -1,5 +1,5 @@
 //
-// Created by Alexey Mihailov on 2020-03-20.
+// Created by Alexey Mihailov
 //
 
 #include "nbFormMainExt.h"
@@ -13,12 +13,12 @@ wxEND_EVENT_TABLE()
 */
 nbFormMainExt::nbFormMainExt(wxWindow *parent) : nbFormMain(parent) {
     Bind(EV_PROJECT_LOAD_DONE,&nbFormMainExt::OnEvLoadProjectDone,this);
-    std::cout<<"Binding completed!"<<std::endl;
+   // std::cout<<"Binding completed!"<<std::endl;
 }
 
 void nbFormMainExt::OnEvLoadProjectDone(EvProjectLoadDone &event) {
     std::cout<<"Loading Done!"<<std::endl;
-    m_staticText4->SetLabelText("Loading Done!");
+  //  m_staticText4->SetLabelText("Loading Done!");
 }
 
 

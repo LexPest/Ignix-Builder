@@ -1,26 +1,21 @@
 //
-// Created by LexPest on 03.03.2020.
+// Created by LexPest
 //
 
 #include "nbWxApp.h"
 #include "nbWxForms.h"
-#include "nbWxAppWorkers.h"
+#include "nbWxAppGlobals.h"
 #include <wx/sharedptr.h>
 
-std::shared_ptr<nbWxObserverProjectWorker> nbWxAppWorkers::MProjectWorker;
-wxWeakRef<nbFormMainExt> nbWxAppWorkers::MMainForm;
+std::shared_ptr<nbWxProjectOpenedInForm> nbWxAppGlobals::MProjectWorker;
+wxWeakRef<nbFormMainExt> nbWxAppGlobals::MMainForm;
 
 bool nbWxApp::OnInit() {
     wxInitAllImageHandlers();
-    //nbFormMain* mainForm = new nbFormMain(NULL);
-    //std::shared_ptr<nbFormMain> mainForm = std::make_shared<nbFormMain>(NULL);
-    nbWxAppWorkers::MMainForm = new nbFormMainExt(NULL);
-    std::shared_ptr<nbProjectWorker> projectWorkerMain = std::make_shared<nbProjectWorker>();
-    nbWxAppWorkers::MProjectWorker = std::make_shared<nbWxObserverProjectWorker>(projectWorkerMain, nbWxAppWorkers::MMainForm);
-    nbWxAppWorkers::MProjectWorker->InitObserver(nbWxAppWorkers::MProjectWorker);
+    nbWxAppGlobals::MMainForm = new nbFormMainExt(NULL);
+    nbWxAppGlobals::MProjectWorker = std::make_shared<nbWxProjectOpenedInForm>(nbWxAppGlobals::MMainForm);
 
-    nbWxAppWorkers::MMainForm->Show();
+    nbWxAppGlobals::MMainForm->Show();
 
-    nbWxAppWorkers::MProjectWorker->start_loadProject();
     return true;
 }

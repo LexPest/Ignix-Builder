@@ -1,5 +1,5 @@
 //
-// Created by LexPest on 03.03.2020.
+// Created by LexPest
 //
 
 #ifndef NERP_BUILDER_NBWXAPP_H

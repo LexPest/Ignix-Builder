@@ -1,5 +1,5 @@
 //
-// Created by Alexey Mihailov on 2020-03-18.
+// Created by Alexey Mihailov
 //
 
 #include "nbPropertyGroup.h"

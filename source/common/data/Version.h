@@ -1,5 +1,5 @@
 //
-// Created by Alexey Mihailov on 2020-03-17.
+// Created by Alexey Mihailov
 //
 
 #ifndef NERP_BUILDER_VERSION_H
