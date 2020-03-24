@@ -62,7 +62,6 @@ class nbFormMain : public wxFrame
 		wxRichTextCtrl* m_richText2;
 		wxStaticBitmap* m_bitmap2;
 		wxStaticText* m_staticText1;
-		wxDirPickerCtrl* m_dirPicker1;
 		wxButton* m_button2;
 		wxStaticText* m_staticText3;
 		wxPanel* m_panel2;
@@ -75,6 +74,7 @@ class nbFormMain : public wxFrame
 
 	public:
 		wxStaticText* m_staticText4;
+		wxDirPickerCtrl* m_dirPicker_projectPath;
 
 		nbFormMain( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Nerp-Builder GUI"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 857,749 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 

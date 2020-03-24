@@ -138,10 +138,10 @@ nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, 
 	m_staticText1->Wrap( -1 );
 	bSizer5->Add( m_staticText1, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_dirPicker1 = new wxDirPickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_DEFAULT_STYLE );
-	m_dirPicker1->SetMinSize( wxSize( 400,-1 ) );
+	m_dirPicker_projectPath = new wxDirPickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_DEFAULT_STYLE );
+	m_dirPicker_projectPath->SetMinSize( wxSize( 400,-1 ) );
 
-	bSizer5->Add( m_dirPicker1, 1, wxALL, 5 );
+	bSizer5->Add( m_dirPicker_projectPath, 1, wxALL, 5 );
 
 	m_button2 = new wxButton( this, wxID_ANY, wxT("Do Build"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer5->Add( m_button2, 0, wxALL, 5 );
@@ -178,12 +178,12 @@ nbFormMain::nbFormMain( wxWindow* parent, wxWindowID id, const wxString& title, 
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	m_dirPicker1->Connect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( nbFormMain::sourceDirChanged ), NULL, this );
+	m_dirPicker_projectPath->Connect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( nbFormMain::sourceDirChanged ), NULL, this );
 }
 
 nbFormMain::~nbFormMain()
 {
 	// Disconnect Events
-	m_dirPicker1->Disconnect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( nbFormMain::sourceDirChanged ), NULL, this );
+	m_dirPicker_projectPath->Disconnect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( nbFormMain::sourceDirChanged ), NULL, this );
 
 }

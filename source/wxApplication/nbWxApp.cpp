@@ -14,6 +14,7 @@ bool nbWxApp::OnInit() {
     wxInitAllImageHandlers();
     nbWxAppGlobals::MMainForm = new nbFormMainExt(NULL);
     nbWxAppGlobals::MProjectWorker = std::make_shared<nbWxProjectOpenedInForm>(nbWxAppGlobals::MMainForm);
+    nbWxAppGlobals::MMainForm->LinkOpenedInFormHandler(nbWxAppGlobals::MProjectWorker);
 
     nbWxAppGlobals::MMainForm->Show();
 

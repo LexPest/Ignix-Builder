@@ -3,25 +3,16 @@
 //
 
 #include "nbWxProjectOpenedInForm.h"
+#include "../logic/nbProjectWorker.h"
 #include <future>
 
-/*
-void nbWxProjectOpenedInForm::n_callback_projectLoadDone(bool parIsSuccess,
-                                                           std::shared_ptr<nbOpenedProjectHandler> parProjectHandler,
-                                                           std::string message) {
-  //  std::this_thread::sleep_for(std::chrono::seconds(5));
-
-  //  std::cout << "Callback called!" << std::endl;
-
-
-    EvProjectLoadDone* loadDoneEv = new EvProjectLoadDone(linkedForm->GetId(), EV_PROJECT_LOAD_DONE, parIsSuccess, message);
-    linkedForm->GetEventHandler()->QueueEvent(loadDoneEv);
-}*/
-
-/*
-void nbWxProjectOpenedInForm::start_loadProject() {
-    //F_ProjectLoading = std::async(std::launch::async, ..., this, true, nullptr, "OK");
-}*/
-
-
 nbWxProjectOpenedInForm::nbWxProjectOpenedInForm(const wxWeakRef<nbFormMainExt> &linkedForm) : linkedForm(linkedForm) {}
+
+void nbWxProjectOpenedInForm::loadProject(const std::string &parLoadPath)
+{
+    auto uiBlocks = formControlsBlockingMech.blockElement(wx_static_cast(wxWeakRef<wxFrame>, linkedForm), linkedForm->m_dirPicker_projectPath);
+
+    F_ProjectLoading = std::async(std::launch::async, &nbProjectWorker::loadProject, [this, uiBlocks](nbReqProjectLoadingResult result){
+        formControlsBlockingMech.unblockElement(wx_static_cast(wxWeakRef<wxFrame>, linkedForm), linkedForm->m_dirPicker_projectPath, uiBlocks);
+        }, parLoadPath);
+}

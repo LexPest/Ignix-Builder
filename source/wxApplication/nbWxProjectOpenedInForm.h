@@ -9,9 +9,12 @@
 #include "nbWxForms.h"
 #include "nbFormMainExt.h"
 #include "../data/nbOpenedProjectHandler.h"
+#include "nbWxFormElementsBlockingMechanism.h"
 #include <wx/sharedptr.h>
 #include <future>
 #include <memory>
+
+class nbFormMainExt;
 
 class nbWxProjectOpenedInForm  {
 public:
@@ -23,6 +26,7 @@ public:
 
 private:
     wxWeakRef<nbFormMainExt> linkedForm;
+    nbWxFormElementsBlockingMechanism formControlsBlockingMech;
     std::shared_ptr<nbOpenedProjectHandler> cOpenedProject;
 
     
