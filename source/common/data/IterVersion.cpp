@@ -29,3 +29,7 @@ bool IterVersion::operator<=(const IterVersion &rhs) const {
 bool IterVersion::operator>=(const IterVersion &rhs) const {
     return !(*this < rhs);
 }
+
+IterVersion::IterVersion(const std::string &parStr) {
+    Value = std::stoull(parStr);
+}

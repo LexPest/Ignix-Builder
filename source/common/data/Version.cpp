@@ -34,3 +34,12 @@ bool Version::operator<=(const Version &rhs) const {
 bool Version::operator>=(const Version &rhs) const {
     return !(*this < rhs);
 }
+
+Version::Version(const std::string & parStr) {
+    size_t dotPos = parStr.find_first_of('.');
+    std::string majorVer = parStr.substr(0, dotPos);
+    std::string minorVer = parStr.substr(dotPos + 1, parStr.size() - 1 - dotPos);
+    Major = std::stoi(majorVer);
+    Minor = std::stoi(minorVer);
+}
+

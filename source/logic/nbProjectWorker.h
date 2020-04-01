@@ -8,6 +8,7 @@
 #include <string>
 #include <list>
 #include <ios>
+#include <filesystem>
 #include "../common/interface/IObservable.h"
 #include "request_data/nbReqProjectLoadingResult.h"
 #include "request_data/nbReqProjectSavingResult.h"

@@ -7,7 +7,7 @@ project(Nerp-Builder)
 # ReleaseDistrib
 
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     message(" ")
@@ -62,7 +62,7 @@ set(SRC_FILES
         wxApplication/nbWxApp.h
         wxApplication/nbWxForms.cpp
         wxApplication/nbWxForms.h
-        data/nbProject.cpp data/nbProject.h common/data/Version.cpp common/data/Version.h common/data/IterVersion.cpp common/data/IterVersion.h data/nbRecipe.cpp data/nbRecipe.h data/nbPropertyGroup.cpp data/nbPropertyGroup.h data/nbProperty.cpp data/nbProperty.h data/nbEPropertyType.h data/nbERecipeKind.h logic/nbProjectWorker.cpp logic/nbProjectWorker.h common/interface/IObservable.cpp common/interface/IObservable.h data/nbFeature.cpp data/nbFeature.h data/nbDependency.cpp data/nbDependency.h wxApplication/nbWxProjectOpenedInForm.cpp wxApplication/nbWxProjectOpenedInForm.h common/interface/ILinkedObserver.cpp common/interface/ILinkedObserver.h wxApplication/nbWxAppGlobals.cpp wxApplication/nbWxAppGlobals.h data/nbOpenedProjectHandler.cpp data/nbOpenedProjectHandler.h wxApplication/nbFormMainExt.cpp wxApplication/nbFormMainExt.h wxApplication/events/EvProjectLoadDone.cpp wxApplication/events/EvProjectLoadDone.h wxApplication/nbWxProjectOpenedSimple.cpp wxApplication/nbWxProjectOpenedSimple.h logic/request_data/nbReqProjectLoadingResult.cpp logic/request_data/nbReqProjectLoadingResult.h logic/request_data/nbReqProjectSavingResult.cpp logic/request_data/nbReqProjectSavingResult.h wxApplication/nbWxFormElementsBlockingMechanism.cpp wxApplication/nbWxFormElementsBlockingMechanism.h wxApplication/nbWxFormElementBlockObject.cpp wxApplication/nbWxFormElementBlockObject.h wxApplication/events/EvNbWxFormCustomAction.cpp wxApplication/events/EvNbWxFormCustomAction.h)
+        data/nbProject.cpp data/nbProject.h common/data/Version.cpp common/data/Version.h common/data/IterVersion.cpp common/data/IterVersion.h data/nbRecipe.cpp data/nbRecipe.h data/nbPropertyGroup.cpp data/nbPropertyGroup.h data/nbProperty.cpp data/nbProperty.h data/nbEPropertyType.h data/nbERecipeKind.h logic/nbProjectWorker.cpp logic/nbProjectWorker.h common/interface/IObservable.cpp common/interface/IObservable.h data/nbFeature.cpp data/nbFeature.h data/nbDependency.cpp data/nbDependency.h wxApplication/nbWxProjectOpenedInForm.cpp wxApplication/nbWxProjectOpenedInForm.h common/interface/ILinkedObserver.cpp common/interface/ILinkedObserver.h wxApplication/nbWxAppGlobals.cpp wxApplication/nbWxAppGlobals.h data/nbOpenedProjectHandler.cpp data/nbOpenedProjectHandler.h wxApplication/nbFormMainExt.cpp wxApplication/nbFormMainExt.h wxApplication/events/EvProjectLoadDone.cpp wxApplication/events/EvProjectLoadDone.h wxApplication/nbWxProjectOpenedSimple.cpp wxApplication/nbWxProjectOpenedSimple.h logic/request_data/nbReqProjectLoadingResult.cpp logic/request_data/nbReqProjectLoadingResult.h logic/request_data/nbReqProjectSavingResult.cpp logic/request_data/nbReqProjectSavingResult.h wxApplication/nbWxFormElementsBlockingMechanism.cpp wxApplication/nbWxFormElementsBlockingMechanism.h wxApplication/nbWxFormElementBlockObject.cpp wxApplication/nbWxFormElementBlockObject.h wxApplication/events/EvNbWxFormCustomAction.cpp wxApplication/events/EvNbWxFormCustomAction.h data/consts/nbProjectStructConsts.h logic/factories/nbProjectEntitiesLoader.cpp logic/factories/nbProjectEntitiesLoader.h)
 
 if(WIN32)
     # Include a RC file for windows

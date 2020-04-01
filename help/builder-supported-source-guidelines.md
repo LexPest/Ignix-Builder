@@ -13,7 +13,7 @@ Format: __YAML__
 
 **Fields:**
 * Nerp-Builder Supported Min Version
-* Supported Recipes Iteration Actual Version
+* Supported Recipes Iteration Actual Version (After template recipe update the next iteration comes and all other recipes should be updated)
 * Target project name 
 * Last User Recipe Opened
 * Default Template Recipe
