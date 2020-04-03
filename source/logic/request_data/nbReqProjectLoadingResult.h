@@ -6,7 +6,9 @@
 #define NERP_BUILDER_NBREQPROJECTLOADINGRESULT_H
 
 #include <string>
-#include "../../data/nbOpenedProjectHandler.h"
+#include "../nbOpenedProjectHandler.h"
+
+struct nbOpenedProjectHandler;
 
 struct nbReqProjectLoadingResult {
     std::shared_ptr<nbOpenedProjectHandler> LoadedProjectHandler;

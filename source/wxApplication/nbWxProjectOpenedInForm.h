@@ -8,7 +8,7 @@
 
 #include "nbWxForms.h"
 #include "nbFormMainExt.h"
-#include "../data/nbOpenedProjectHandler.h"
+#include "../logic/nbOpenedProjectHandler.h"
 #include "nbWxFormElementsBlockingMechanism.h"
 #include <wx/sharedptr.h>
 #include <future>

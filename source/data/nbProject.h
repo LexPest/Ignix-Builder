@@ -10,19 +10,30 @@
 #include "nbRecipe.h"
 #include <string>
 #include <list>
+#include "../logic/nbProjectWorker.h"
+#include "../logic/nbOpenedProjectHandler.h"
 
 struct nbRecipe;
 
+class nbOpenedProjectHandler;
+
+
 struct nbProject {
+
+    friend class nbOpenedProjectHandler;
+
     Version CVersion;
     IterVersion SupportedRecipesIterActualVersion;
     std::string ProjectName;
 
-    std::list<std::shared_ptr<nbRecipe>> UserRecipes;
-    std::list<std::shared_ptr<nbRecipe>> TemplateRecipes;
+
 
     nbProject(const Version &cVersion, const IterVersion &supportedRecipesIterActualVersion,
               const std::string &projectName);
+
+protected:
+    std::list<std::shared_ptr<nbRecipe>> UserRecipes;
+    std::list<std::shared_ptr<nbRecipe>> TemplateRecipes;
 };
 
 

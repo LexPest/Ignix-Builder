@@ -8,9 +8,8 @@
 #include <vector>
 #include <functional>
 
-template <typename TObserver>
-class IObservable
-{
+template<typename TObserver>
+class IObservable {
 public:
 
     typedef size_t size_type;
@@ -20,42 +19,17 @@ public:
     //*****************************************************************
     /// Add an observer to the list.
     //*****************************************************************
-    void AddObserver(std::shared_ptr<TObserver> observer)
-    {
-        // See if we already have it in our list.
-        /*
-        auto i_observer = std::find(observer_list.begin(),
-                                                                     observer_list.end(),
-                                                                     &observer);
+    void AddObserver(std::shared_ptr<TObserver> observer) {
 
-        // Not there?
-        if (i_observer == observer_list.end())
-        {*/
-            // Add it.
-            observer_list.push_back(observer);
-        //}
+        observer_list.push_back(observer);
     }
 
     //*****************************************************************
     /// Remove a particular observer from the list.
     //*****************************************************************
-    void RemoveObserver(std::shared_ptr<TObserver> observer)
-    {
-        // See if we have it in our list.
-/*
-        auto i_observer = std::find(observer_list.begin(),
-                                                               observer_list.end(),
-                                                               &observer);
-
-        // Found it?
-        if (i_observer != observer_list.end())
-        {*/
-            // Erase it.
-           // observer_list.erase(i_observer);
-        //}
-
-        for (int i = 0; i < observer_list.size(); i++){
-            if (observer_list[i] == observer){
+    void RemoveObserver(std::shared_ptr<TObserver> observer) {
+        for (size_t i = 0; i < observer_list.size(); i++) {
+            if (observer_list[i] == observer) {
                 observer_list.erase(i);
             }
         }
@@ -64,22 +38,28 @@ public:
     //*****************************************************************
     /// Clear all observers from the list.
     //*****************************************************************
-    void ClearObservers()
-    {
+    void ClearObservers() {
         observer_list.clear();
     }
 
     //*****************************************************************
     /// Returns the number of observers.
     //*****************************************************************
-    size_type NumberOfObservers() const
-    {
+    size_type NumberOfObservers() const {
         return observer_list.size();
     }
 
 
 
 protected:
+    //*****************************************************************
+    /// Notify all observers.
+    //*****************************************************************
+    void NotifyAll(std::function<void(TObserver&)> notifyFunc) {
+        for (auto observer : observer_list) {
+            notifyFunc(*observer);
+        }
+    }
 
     /// The list of observers.
     ObserverList observer_list;
