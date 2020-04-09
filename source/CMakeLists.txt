@@ -7,7 +7,9 @@ project(Nerp-Builder)
 # ReleaseDistrib
 
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
+
+add_definitions(-DBOOST_LOG_DYN_LINK=1)
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     message(" ")
@@ -24,7 +26,8 @@ if (WIN32)
     SET(CMAKE_FIND_LIBRARY_PREFIXES "")
     SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
     include_directories(${WinSDK})
-    set (wxWidgets_CONFIGURATION mswu)
+
+   # set (wxWidgets_CONFIGURATION mswu)
     set (wxUSE_UNICODE 1)
     set (UNICODE 1)
     add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
@@ -40,6 +43,12 @@ elseif(APPLE)
     find_package(wxWidgets 3.1 COMPONENTS all REQUIRED)
 endif()
 
+set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_MULTITHREADED ON)
+#set(Boost_USE_STATIC_RUNTIME ON)
+
+find_package(Boost REQUIRED COMPONENTS log filesystem system exception REQUIRED)
+
 # Set version
 SET(VERSION_MAJOR 0)
 SET(VERSION_MINOR 1)
@@ -49,6 +58,9 @@ SET(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 # Include the wxWidgets use file to initialize various settings
 include(${wxWidgets_USE_FILE})
+
+# Include Boost
+include_directories(${Boost_INCLUDE_DIRS})
 
 # Include static libraries
 link_directories(../include_lib)
@@ -76,6 +88,7 @@ endif()
 add_executable(${PROJECT_NAME} WIN32 MACOSX_BUNDLE ${SRC_FILES})
 # Link required libraries to the executable
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/../include_lib/libyaml-cpp/libyaml-cpp.a)
 
 if(APPLE)

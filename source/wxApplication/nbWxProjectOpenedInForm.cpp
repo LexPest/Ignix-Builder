@@ -13,6 +13,7 @@ void nbWxProjectOpenedInForm::loadProject(const std::string &parLoadPath)
     auto uiBlocks = formControlsBlockingMech.blockElement(wx_static_cast(wxWeakRef<wxFrame>, linkedForm), linkedForm->m_dirPicker_projectPath);
 
     F_ProjectLoading = std::async(std::launch::async, &nbProjectWorker::loadProject, [this, uiBlocks](nbReqProjectLoadingResult result){
+        std::cout << result.Message << std::endl;
         formControlsBlockingMech.unblockElement(wx_static_cast(wxWeakRef<wxFrame>, linkedForm), linkedForm->m_dirPicker_projectPath, uiBlocks);
         }, parLoadPath);
 }

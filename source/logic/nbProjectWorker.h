@@ -8,7 +8,8 @@
 #include <string>
 #include <list>
 #include <ios>
-#include <filesystem>
+//#include <filesystem>
+#include <boost/filesystem.hpp>
 #include "../common/interface/IObservable.h"
 #include "request_data/nbReqProjectLoadingResult.h"
 #include "request_data/nbReqProjectSavingResult.h"
@@ -33,8 +34,8 @@ public:
     static void addRecipeToProject(nbOpenedProjectHandler& parPrjHandler, std::shared_ptr<nbRecipe> parRecipe);
 
 private:
-    static std::filesystem::directory_iterator getTemplateRecipesIterator(nbOpenedProjectHandler& parPrjHandler);
-    static std::filesystem::directory_iterator getUserRecipesIterator(nbOpenedProjectHandler& parPrjHandler);
+    static boost::filesystem::directory_iterator getTemplateRecipesIterator(nbOpenedProjectHandler& parPrjHandler);
+    static boost::filesystem::directory_iterator getUserRecipesIterator(nbOpenedProjectHandler& parPrjHandler);
 };
 
 
