@@ -40,3 +40,5 @@ cmake-build-*
 .vs
 
 _dev_tmp
+
+external

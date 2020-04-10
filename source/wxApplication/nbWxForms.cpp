@@ -187,3 +187,15 @@ nbFormMain::~nbFormMain()
 	m_dirPicker_projectPath->Disconnect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( nbFormMain::sourceDirChanged ), NULL, this );
 
 }
+
+nbStartupAnim::nbStartupAnim( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+
+
+	this->Centre( wxBOTH );
+}
+
+nbStartupAnim::~nbStartupAnim()
+{
+}

@@ -82,3 +82,20 @@ class nbFormMain : public wxFrame
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+/// Class nbStartupAnim
+///////////////////////////////////////////////////////////////////////////////
+class nbStartupAnim : public wxFrame
+{
+	private:
+
+	protected:
+
+	public:
+
+		nbStartupAnim( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 600,280 ), long style = wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP|wxTAB_TRAVERSAL );
+
+		~nbStartupAnim();
+
+};
+
