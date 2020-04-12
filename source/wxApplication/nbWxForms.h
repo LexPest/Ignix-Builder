@@ -29,6 +29,7 @@
 #include <wx/button.h>
 #include <wx/panel.h>
 #include <wx/frame.h>
+#include <wx/timer.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -90,10 +91,15 @@ class nbStartupAnim : public wxFrame
 	private:
 
 	protected:
+		wxTimer m_timerShowMainForm;
+
+		// Virtual event handlers, overide them in your derived class
+		virtual void evt_onTimerShowMainForm( wxTimerEvent& event ) { event.Skip(); }
+
 
 	public:
 
-		nbStartupAnim( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 600,280 ), long style = wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP|wxTAB_TRAVERSAL );
+		nbStartupAnim( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 600,260 ), long style = wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP|wxTAB_TRAVERSAL );
 
 		~nbStartupAnim();
 

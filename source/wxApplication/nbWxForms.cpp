@@ -192,10 +192,19 @@ nbStartupAnim::nbStartupAnim( wxWindow* parent, wxWindowID id, const wxString& t
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 
+	m_timerShowMainForm.SetOwner( this, wxID_ANY );
+	m_timerShowMainForm.Start( 2850, true );
+
 
 	this->Centre( wxBOTH );
+
+	// Connect Events
+	this->Connect( wxID_ANY, wxEVT_TIMER, wxTimerEventHandler( nbStartupAnim::evt_onTimerShowMainForm ) );
 }
 
 nbStartupAnim::~nbStartupAnim()
 {
+	// Disconnect Events
+	this->Disconnect( wxID_ANY, wxEVT_TIMER, wxTimerEventHandler( nbStartupAnim::evt_onTimerShowMainForm ) );
+
 }

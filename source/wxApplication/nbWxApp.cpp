@@ -17,10 +17,11 @@ bool nbWxApp::OnInit() {
     nbWxAppGlobals::MProjectWorker = std::make_shared<nbWxProjectOpenedInForm>(nbWxAppGlobals::MMainForm);
     nbWxAppGlobals::MMainForm->LinkOpenedInFormHandler(nbWxAppGlobals::MProjectWorker);
 
-    nbWxAppGlobals::MMainForm->Show();
+    //nbWxAppGlobals::MMainForm->Show();
 
     nbWxAppGlobals::MPanelStartupAnim = new nbStartupAnimExt(NULL);
     nbWxAppGlobals::MPanelStartupAnim->Show();
+    nbWxAppGlobals::MPanelStartupAnim->CenterOnScreen();
 
     return true;
 }

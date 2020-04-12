@@ -14,6 +14,10 @@ public:
     nbStartupAnimExt(wxWindow *parent);
 protected:
     wxWebView* m_animWebView;
+
+    void evt_onTimerShowMainForm(wxTimerEvent &event) override;
+
+
 };
 
 
