@@ -1,3 +1,6 @@
 [submodule "external/yaml-cpp"]
 	path = external/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "external/nerp-essentials"]
+	path = external/nerp-essentials
+	url = https://github.com/lexpest/nerp-essentials

@@ -5,11 +5,11 @@
 #ifndef NERP_BUILDER_NBRECIPE_H
 #define NERP_BUILDER_NBRECIPE_H
 
-#include "../common/data/Version.h"
-#include "../common/data/IterVersion.h"
 #include "nbPropertyGroup.h"
 #include "nbERecipeKind.h"
 #include "nbFeature.h"
+#include <ness/data/Version.h>
+#include <ness/data/IterVersion.h>
 
 #include <string>
 #include <list>

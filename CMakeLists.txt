@@ -38,16 +38,16 @@ SET(VERSION_MINOR 1)
 SET(VERSION_PATCH 1)
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-    message(" ")
-    message("CMAKE IN DEBUG MODE")
-    message(" ")
+    message("\nCMAKE IN DEBUG MODE\n")
 elseif (CMAKE_BUILD_TYPE MATCHES Release)
-    message(" ")
-    message("CMAKE IN RELEASE MODE")
-    message(" ")
+    message("\nCMAKE IN RELEASE MODE\n")
 endif ()
 
 SET(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+
+# Add include folders
+include_directories(source)
+
 
 # Define a variable containing a list of source files for the project
 set(SRC_FILES
@@ -55,9 +55,9 @@ set(SRC_FILES
         source/wxApplication/nbWxApp.h
         source/wxApplication/nbWxForms.cpp
         source/wxApplication/nbWxForms.h
-        source/data/nbProject.cpp source/data/nbProject.h source/common/data/Version.cpp source/common/data/Version.h source/common/data/IterVersion.cpp source/common/data/IterVersion.h source/data/nbRecipe.cpp source/data/nbRecipe.h source/data/nbPropertyGroup.cpp source/data/nbPropertyGroup.h
-        source/data/nbProperty.cpp source/data/nbProperty.h source/data/nbEPropertyType.h source/data/nbERecipeKind.h source/logic/nbProjectWorker.cpp source/logic/nbProjectWorker.h source/common/interface/IObservable.cpp source/common/interface/IObservable.h source/data/nbFeature.cpp source/data/nbFeature.h
-        source/data/nbDependency.cpp source/data/nbDependency.h source/wxApplication/nbWxProjectOpenedInForm.cpp source/wxApplication/nbWxProjectOpenedInForm.h source/common/interface/ILinkedObserver.cpp source/common/interface/ILinkedObserver.h source/wxApplication/nbWxAppGlobals.cpp source/wxApplication/nbWxAppGlobals.h
+        source/data/nbProject.cpp source/data/nbProject.h source/data/nbRecipe.cpp source/data/nbRecipe.h source/data/nbPropertyGroup.cpp source/data/nbPropertyGroup.h
+        source/data/nbProperty.cpp source/data/nbProperty.h source/data/nbEPropertyType.h source/data/nbERecipeKind.h source/logic/nbProjectWorker.cpp source/logic/nbProjectWorker.h  source/data/nbFeature.cpp source/data/nbFeature.h
+        source/data/nbDependency.cpp source/data/nbDependency.h source/wxApplication/nbWxProjectOpenedInForm.cpp source/wxApplication/nbWxProjectOpenedInForm.h source/wxApplication/nbWxAppGlobals.cpp source/wxApplication/nbWxAppGlobals.h
         source/logic/nbOpenedProjectHandler.cpp source/logic/nbOpenedProjectHandler.h source/wxApplication/nbFormMainExt.cpp source/wxApplication/nbFormMainExt.h source/wxApplication/events/EvProjectLoadDone.cpp source/wxApplication/events/EvProjectLoadDone.h source/wxApplication/nbWxProjectOpenedSimple.cpp
         source/wxApplication/nbWxProjectOpenedSimple.h source/logic/request_data/nbReqProjectLoadingResult.cpp source/logic/request_data/nbReqProjectLoadingResult.h source/logic/request_data/nbReqProjectSavingResult.cpp source/logic/request_data/nbReqProjectSavingResult.h source/wxApplication/nbWxFormElementsBlockingMechanism.cpp
         source/wxApplication/nbWxFormElementsBlockingMechanism.h source/wxApplication/nbWxFormElementBlockObject.cpp source/wxApplication/nbWxFormElementBlockObject.h source/wxApplication/events/EvNbWxFormCustomAction.cpp source/wxApplication/events/EvNbWxFormCustomAction.h source/data/consts/nbProjectStructConsts.h
@@ -131,6 +131,14 @@ CHECK_GIT_SUBMODULE_AND_BUILD(${YAML_CPP_DIR})
 include_directories(${YAML_CPP_DIR}/include)
 add_dependencies(${PROJECT_NAME} yaml-cpp)
 target_link_libraries(${PROJECT_NAME} yaml-cpp)
+
+
+# Including Nerp-Essentials
+set(NESS_DIR ${CMAKE_SOURCE_DIR}/external/nerp-essentials)
+CHECK_GIT_SUBMODULE_AND_BUILD(${NESS_DIR})
+include_directories(${NESS_DIR}/source)
+add_dependencies(${PROJECT_NAME} Nerp-Essentials)
+target_link_libraries(${PROJECT_NAME} Nerp-Essentials)
 
 
 # Resources folders

@@ -10,7 +10,6 @@
 #include <ios>
 //#include <filesystem>
 #include <boost/filesystem.hpp>
-#include "../common/interface/IObservable.h"
 #include "request_data/nbReqProjectLoadingResult.h"
 #include "request_data/nbReqProjectSavingResult.h"
 #include "../data/nbRecipe.h"

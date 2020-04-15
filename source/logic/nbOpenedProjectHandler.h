@@ -9,6 +9,7 @@
 #include "../data/nbProject.h"
 #include "nbProjectHandlerIObserver.h"
 #include "../data/nbRecipe.h"
+#include <ness/interface/IObservable.h>
 
 struct nbProject;
 class nbProjectHandlerIObserver;
