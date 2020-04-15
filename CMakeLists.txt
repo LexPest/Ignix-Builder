@@ -18,6 +18,17 @@ function(CHECK_GIT_SUBMODULE_AND_BUILD argPath)
     add_subdirectory(${argPath})
 endfunction()
 
+function(SET_EXPORT_RESOURCES_DIR)
+    if (APPLE)
+        set(EXPORT_RESOURCES_DIR  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/app_res  PARENT_SCOPE)
+    #elseif (WIN32)
+    else()
+        set(EXPORT_RESOURCES_DIR  ${CMAKE_CURRENT_BINARY_DIR}/app_res  PARENT_SCOPE)
+    endif()
+
+
+
+endfunction()
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -122,6 +133,11 @@ add_dependencies(${PROJECT_NAME} yaml-cpp)
 target_link_libraries(${PROJECT_NAME} yaml-cpp)
 
 
+# Resources folders
+set(RESOURCES_EXPORT ${CMAKE_SOURCE_DIR}/app_res)
+SET_EXPORT_RESOURCES_DIR()
+
+
 # MAKE RELEASE DISTRIBUTION
 
 if (CMAKE_BUILD_TYPE MATCHES ReleaseDistrib)
@@ -145,4 +161,20 @@ if (CMAKE_BUILD_TYPE MATCHES ReleaseDistrib)
     else ()
         message("Libraries distribution with release build not set (unsupported platform)!")
     endif ()
-endif ()
+
+
+    #Copy resources
+        message("Will copy the resources folder")
+    add_custom_command(TARGET ${PROJECT_NAME}
+                        POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${RESOURCES_EXPORT} ${EXPORT_RESOURCES_DIR})
+
+else()
+    if (WIN32)
+        message(WARNING "Create resources symlink manually!")
+    else()
+        message("Symlinking resources")
+        # Symlink to app_res
+        add_custom_command(TARGET ${PROJECT_NAME}
+                POST_BUILD COMMAND ${CMAKE_COMMAND} -E create_symlink ${RESOURCES_EXPORT} ${EXPORT_RESOURCES_DIR})
+    endif()
+endif()
