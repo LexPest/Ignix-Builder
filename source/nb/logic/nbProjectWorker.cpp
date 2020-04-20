@@ -13,8 +13,6 @@
 using namespace nerp;
 void nbProjectWorker::loadProject(std::function<void(nbReqProjectLoadingResult)> parEndCallback,
                                   const std::string &parAbsoluteProjectPath) {
-    //std::this_thread::sleep_for(std::chrono::seconds(5));
-
     std::string outMessage = "NONE";
     std::shared_ptr<nbOpenedProjectHandler> outOpenedProjectHandler = nullptr;
     std::string rootPath = parAbsoluteProjectPath + "/";

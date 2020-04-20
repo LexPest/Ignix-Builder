@@ -21,6 +21,32 @@ namespace nerp {
             //...
         }
 
+        namespace recipe{
+            const std::string YAML_FIELD_FORMAT_VER = "format-version";
+            const std::string YAML_FIELD_ITERACTION_VERSION = "iteration-version";
+            const std::string YAML_FIELD_RECIPE_NAME = "name";
+            const std::string YAML_FIELD_PROPS_ARR = "props";
+
+            const std::string YAML_PROPS_FIELD_GROUP_NAME = "group_name";
+
+            namespace propelem {
+                const std::string YAML_PROPELEM_TYPE = "type";
+                const std::string YAML_PROPELEM_NAME = "name";
+                const std::string YAML_PROPELEM_EMACRO = "emacro";
+                const std::string YAML_PROPELEM_DATA = "data";
+
+                namespace depends {
+                    const std::string YAML_PROPELEM_DEPENDS_AVAIL_ON_NAME = "depends_available_on_name";
+                    const std::string YAML_PROPELEM_DEPENDS_AVAIL_ON_EMACRO = "depends_available_on_emacro";
+                }
+
+                namespace types {
+                    const std::string YAML_PROPELEM_TYPE_STRING = "string";
+                    const std::string YAML_PROPELEM_TYPE_CHECKBOX = "chkbox";
+                }
+            }
+        }
+
     }
 }
 

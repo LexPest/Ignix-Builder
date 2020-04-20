@@ -15,5 +15,11 @@ std::shared_ptr<nbProject> nbProjectEntitiesLoader::getProjectFromYAML(const YAM
 
 std::shared_ptr<nbRecipe>
 nbProjectEntitiesLoader::getProjectRecipe(nbERecipeKind parRecipeKind, const YAML::Node &parRecipeNodeFile) {
-    return std::shared_ptr<nbRecipe>();
+    Version recipeFormatVer = parRecipeNodeFile[nb_consts::recipe::YAML_FIELD_RECIPE_NAME].as<std::string>();
+    IterVersion recipeIterVer = parRecipeNodeFile[nb_consts::recipe::YAML_FIELD_ITERACTION_VERSION].as<std::string>();
+    std::string recipeName = parRecipeNodeFile[nb_consts::recipe::YAML_FIELD_RECIPE_NAME].as<std::string>();
+
+    //TODO: Recipe prop elems parsing
+
+    return std::make_shared<nbRecipe>(recipeFormatVer, recipeIterVer, std::move(recipeName), parRecipeKind);
 }
