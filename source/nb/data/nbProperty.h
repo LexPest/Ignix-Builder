@@ -14,6 +14,7 @@ namespace nerp {
         std::string EMacroName;
         std::string RichDescription;
 
+
         nbProperty(nbEPropertyType cType, const std::string &name, const std::string &eMacroName);
     };
 }

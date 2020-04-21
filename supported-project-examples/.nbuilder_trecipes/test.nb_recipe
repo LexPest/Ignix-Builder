@@ -1,9 +1,45 @@
 format-version : 0.2
 iteration-version : 1
 name : "Test"
-props :
-- {group_name : "Test Group"}
-    - {type : "string", name : "Prop String Test", emacro: "PROP_TEST_STRING", data : "Test Data"}
-    - {type : "chkbox", name : "Dependence Chkbox", emacro: "DEP_CHKBOX_1", data : true, depends_available_on_name : ["DEP_CHKBOX_2"]}
-    - {type : "chkbox", name : "Dependence Chkbox 2", emacro: "DEP_CHKBOX_2", data : true, depends_available_on_emacro : ["DEP_CHKBOX_3"]}
-    - {type : "chkbox", name : "Dependence Chkbox 3", emacro: "DEP_CHKBOX_3", data : true}
+features :
+    - name: "Base Test Feature"
+      emacro: "E_TEST_BASE"
+      richdescr: null
+      deps:
+      features:
+      prop_groups:
+        - group_name : "Test Group"
+          props:
+            - type : "string"
+              name : "Prop String Test"
+              emacro: "PROP_TEST_STRING"
+              data : "Test Data"
+              deps:
+            - type : "chkbox"
+              name : "Dependence Chkbox"
+              emacro: "DEP_CHKBOX_1"
+              data : True
+              deps:
+                -  type: "available_on_names"
+                   target: ["DEP_CHKBOX_2"]
+            - type : "chkbox"
+              name : "Dependence Chkbox 2"
+              emacro: "DEP_CHKBOX_2", data : true
+              data : False
+              deps:
+                - type: "available_on_emacro_s"
+                  target: ["DEP_CHKBOX_3"]
+            - type : "chkbox"
+              name : "Dependence Chkbox 3"
+              emacro: "DEP_CHKBOX_3"
+              data : True
+              deps:
+
+    - name: "Empty Test Feature"
+      emacro: "E_TEST_EMPTY_EXAMPLE"
+      richdescr: null
+      deps:
+        - type : "available_on_names"
+          target : ["Base Test Feature"]
+      features:
+      prop_groups:

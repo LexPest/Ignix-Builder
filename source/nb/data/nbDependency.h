@@ -7,15 +7,24 @@
 
 #include <string>
 #include "nbProject.h"
+#include <memory>
+
 namespace nerp {
     struct nbProject;
 
     struct nbDependency {
-        virtual std::string getDependsOnMessage() = 0;
+        nbDependency(const std::shared_ptr<nbProject> &targetProjectContext);
 
-        virtual bool isDependencySatisfied(std::shared_ptr<nbProject> parProjectContext) = 0;
+        virtual std::string getDependsOnMessage() = 0;
+        virtual bool tryResolve() = 0;
+        virtual bool isResolved() = 0;
+
+        virtual bool checkSatisfiedAndSetValue() = 0;
 
         virtual ~nbDependency() = 0;
+
+    protected:
+        std::shared_ptr<nbProject> targetProjectContext;
     };
 }
 

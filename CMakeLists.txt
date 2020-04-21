@@ -35,7 +35,7 @@ set(SRC_FILES
         source/nb/logic/nbOpenedProjectHandler.cpp source/nb/logic/nbOpenedProjectHandler.h source/nb/logic/request_data/nbReqProjectLoadingResult.cpp source/nb/logic/request_data/nbReqProjectLoadingResult.h
         source/nb/logic/request_data/nbReqProjectSavingResult.cpp source/nb/logic/request_data/nbReqProjectSavingResult.h
         source/nb/data/consts/nbProjectStructConsts.h
-        source/nb/logic/factories/nbProjectEntitiesLoader.cpp source/nb/logic/factories/nbProjectEntitiesLoader.h source/nb/logic/nbProjectHandlerIObserver.cpp source/nb/logic/nbProjectHandlerIObserver.h)
+        source/nb/logic/factories/nbProjectEntitiesLoader.cpp source/nb/logic/factories/nbProjectEntitiesLoader.h source/nb/logic/nbProjectHandlerIObserver.cpp source/nb/logic/nbProjectHandlerIObserver.h source/nb/data/recipe_dependencies/nbFeatureDependency.cpp source/nb/data/recipe_dependencies/nbFeatureDependency.h source/nb/data/recipe_dependencies/nbPropertyDependency.cpp source/nb/data/recipe_dependencies/nbPropertyDependency.h source/nb/data/recipe_dependencies/nbDependencyFactory.cpp source/nb/data/recipe_dependencies/nbDependencyFactory.h source/nb/data/recipe_dependencies/feature/nbFDep_AvailableOnNames.cpp source/nb/data/recipe_dependencies/feature/nbFDep_AvailableOnNames.h source/nb/data/recipe_dependencies/property/nbPDep_AvailableOnNames.cpp source/nb/data/recipe_dependencies/property/nbPDep_AvailableOnNames.h source/nb/data/recipe_dependencies/property/nbPDep_AvailableOnEMacro_s.cpp source/nb/data/recipe_dependencies/property/nbPDep_AvailableOnEMacro_s.h)
 
 
 add_library(Nerp-Builder STATIC ${SRC_FILES})

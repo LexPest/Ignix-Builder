@@ -17,9 +17,11 @@ namespace nerp {
         std::string CName;
         std::string EMacroName;
         std::string RichDescription;
+        std::vector<nbDependency> RequiredDependencies;
+
         std::list<nbFeature> ChildFeatures;
         std::list<nbPropertyGroup> PropertyGroups;
-        std::vector<nbDependency> RequiredDependencies;
+
 
         nbFeature(const std::string &cName, const std::string &eMacroName);
     };
