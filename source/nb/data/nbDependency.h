@@ -19,7 +19,7 @@ namespace nerp {
         virtual bool tryResolve() = 0;
         virtual bool isResolved() = 0;
 
-        virtual bool checkSatisfiedAndSetValue() = 0;
+        virtual bool checkSatisfiedAndSetValueAndAvailable() = 0;
 
         virtual ~nbDependency() = 0;
 

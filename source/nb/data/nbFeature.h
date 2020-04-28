@@ -22,6 +22,8 @@ namespace nerp {
         std::list<nbFeature> ChildFeatures;
         std::list<nbPropertyGroup> PropertyGroups;
 
+        bool IsAvailable;
+
 
         nbFeature(const std::string &cName, const std::string &eMacroName);
     };
