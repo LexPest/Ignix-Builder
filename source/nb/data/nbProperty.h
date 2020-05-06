@@ -26,6 +26,7 @@ namespace nerp {
                    const std::shared_ptr<nbPropertyGroup> &placedInGroup);
 
         virtual bool getDataBoolFlag() = 0;
+        virtual bool setDataBoolFlag() = 0;
     };
 }
 

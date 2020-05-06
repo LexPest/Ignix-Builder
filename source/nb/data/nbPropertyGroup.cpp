@@ -14,3 +14,12 @@ std::shared_ptr<nbProperty> nbPropertyGroup::getPropByName(const std::string &pa
     }
     return nullptr;
 }
+
+std::shared_ptr<nbProperty> nbPropertyGroup::getPropByEMacro(const std::string &parEMacro) {
+    for (auto it : Props){
+        if (it->EMacroName == parEMacro){
+            return it;
+        }
+    }
+    return nullptr;
+}

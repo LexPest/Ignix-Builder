@@ -19,6 +19,7 @@ namespace nerp {
         nbPropertyGroup(const std::string &name);
 
         std::shared_ptr<nbProperty> getPropByName(const std::string& parName);
+        std::shared_ptr<nbProperty> getPropByEMacro(const std::string& parEMacro);
     };
 }
 
