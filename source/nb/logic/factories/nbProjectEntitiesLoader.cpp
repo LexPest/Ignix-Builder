@@ -3,7 +3,7 @@
 //
 
 #include "nbProjectEntitiesLoader.h"
-#include "../../data/consts/nbProjectStructConsts.h"
+#include <nb/consts/nbProjectStructConsts.h>
 using namespace nerp;
 std::shared_ptr<nbProject> nbProjectEntitiesLoader::getProjectFromYAML(const YAML::Node &parProjectSupportNodeFile) {
     Version minSupportedVer = parProjectSupportNodeFile[nb_consts::support::YAML_FIELD_NBVERSION].as<std::string>();

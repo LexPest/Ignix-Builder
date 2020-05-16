@@ -7,16 +7,18 @@
 #ifndef NERP_BUILDER_WX_NBFEATUREDEPENDENCY_H
 #define NERP_BUILDER_WX_NBFEATUREDEPENDENCY_H
 
-#include <nb/data/nbDependency.h>
+#include <nb/data/dependencies/nbDependency.h>
 #include <memory>
-namespace nerp {
-    class nbFeatureDependency : public nbDependency {
-    public:
-        nbFeatureDependency(const std::shared_ptr<nbProject> &targetProjectContext,
-                            const std::shared_ptr<nbFeature> &targetFeature);
+#include <nb/data/features/nbFeature.h>
+#include "nbDependency_InRecipe.h"
 
-    protected:
-        std::shared_ptr<nbFeature> targetFeature;
+namespace nerp {
+    class nbFeatureDependency : public nbDependency_InRecipe {
+    public:
+        //std::shared_ptr<nbFeature> targetFeature;
+
+        //nbFeatureDependency(const std::shared_ptr<nbFeature> &targetFeature);
+        nbFeatureDependency();
     };
 }
 

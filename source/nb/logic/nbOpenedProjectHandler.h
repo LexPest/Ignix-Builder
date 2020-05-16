@@ -6,9 +6,9 @@
 #define NERP_BUILDER_NBOPENEDPROJECTHANDLER_H
 
 #include <string>
-#include "../data/nbProject.h"
+#include "nb/data/project/nbProject.h"
 #include "nbProjectHandlerIObserver.h"
-#include "../data/nbRecipe.h"
+#include "nb/data/project/nbRecipe.h"
 #include <ness/interface/IObservable.h>
 namespace nerp {
     struct nbProject;

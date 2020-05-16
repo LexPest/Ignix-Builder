@@ -10,6 +10,8 @@
 #include <string>
 #include <list>
 #include <memory>
+#include <functional>
+#include <iostream>
 
 namespace nerp {
     template<typename TARGET_T>
@@ -62,6 +64,17 @@ namespace nerp {
         }
         parSetValueAndAvailableFunc(isSatisfied);
         return isSatisfied;
+    }
+
+    template <typename TARGET_T, typename IBOOL_TARGET_T>
+    static inline bool hIsSatisfied(const TList<TARGET_T>& parDepsList){
+        for (auto item : parDepsList){
+            auto boolValuedProp = std::static_pointer_cast<IBOOL_TARGET_T>(item.second);
+            if (! boolValuedProp->getBoolValue()){
+                return false;
+            }
+        }
+        return true;
     }
 }
 

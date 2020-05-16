@@ -7,7 +7,7 @@
 
 #include <memory>
 #include <yaml-cpp/yaml.h>
-#include "../../data/nbProject.h"
+#include "nb/data/project/nbProject.h"
 namespace nerp {
     class nbProjectEntitiesLoader {
     public:

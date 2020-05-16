@@ -4,4 +4,6 @@
 // Use of this source code is governed by an MIT license
 // that can be found in the LICENSE file.
 
-#include "nbFDep_AvailableOnNames.h"
+#include "nbFeatureDependency.h"
+
+nerp::nbFeatureDependency::nbFeatureDependency() {}

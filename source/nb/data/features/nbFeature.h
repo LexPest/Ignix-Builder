@@ -8,10 +8,10 @@
 #include <string>
 #include <list>
 #include <vector>
-#include "nbPropertyGroup.h"
-#include "nbDependency.h"
+#include "nb/data/props/nbPropertyGroup.h"
+#include <nb/data/dependencies/nbDependency.h>
 namespace nerp {
-    struct nbDependency;
+class nbDependency;
 
     struct nbFeature {
         std::string CName;
@@ -23,7 +23,9 @@ namespace nerp {
         std::list<nbPropertyGroup> PropertyGroups;
 
         bool IsAvailable;
+        bool IsEnabled;
 
+        bool getBoolValue() {return IsEnabled;}
 
         nbFeature(const std::string &cName, const std::string &eMacroName);
     };

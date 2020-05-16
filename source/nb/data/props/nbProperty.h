@@ -25,8 +25,6 @@ namespace nerp {
         nbProperty(nbEPropertyType cType, const std::string &name, const std::string &eMacroName,
                    const std::shared_ptr<nbPropertyGroup> &placedInGroup);
 
-        virtual bool getDataBoolFlag() = 0;
-        virtual bool setDataBoolFlag() = 0;
     };
 }
 

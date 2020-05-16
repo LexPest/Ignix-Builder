@@ -6,8 +6,8 @@
 #define NERP_BUILDER_NBPROJECTHANDLERIOBSERVER_H
 
 
-#include "../data/nbERecipeKind.h"
-#include "../data/nbRecipe.h"
+#include "nb/data/project/nbERecipeKind.h"
+#include "nb/data/project/nbRecipe.h"
 namespace nerp {
     struct nbRecipe;
 

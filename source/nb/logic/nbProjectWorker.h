@@ -12,7 +12,7 @@
 #include <boost/filesystem.hpp>
 #include "nb/logic/request_data/nbReqProjectLoadingResult.h"
 #include "nb/logic/request_data/nbReqProjectSavingResult.h"
-#include "../data/nbRecipe.h"
+#include "nb/data/project/nbRecipe.h"
 #include "nbProjectHandlerIObserver.h"
 namespace nerp {
     class nbIObserverProjectWorker;

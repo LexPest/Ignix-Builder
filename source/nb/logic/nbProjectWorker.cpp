@@ -7,8 +7,7 @@
 #include <yaml-cpp/yaml.h>
 #include <iostream>
 #include "nb/logic/factories/nbProjectEntitiesLoader.h"
-
-#include "../data/consts/nbProjectStructConsts.h"
+#include <nb/consts/nbProjectStructConsts.h>
 
 using namespace nerp;
 void nbProjectWorker::loadProject(std::function<void(nbReqProjectLoadingResult)> parEndCallback,

@@ -5,9 +5,9 @@
 #ifndef NERP_BUILDER_NBRECIPE_H
 #define NERP_BUILDER_NBRECIPE_H
 
-#include "nbPropertyGroup.h"
+#include "nb/data/props/nbPropertyGroup.h"
 #include "nbERecipeKind.h"
-#include "nbFeature.h"
+#include "nb/data/features/nbFeature.h"
 #include <ness/data/Version.h>
 #include <ness/data/IterVersion.h>
 
