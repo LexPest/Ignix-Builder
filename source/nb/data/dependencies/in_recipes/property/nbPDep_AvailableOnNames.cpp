@@ -75,13 +75,10 @@ using namespace nerp;
 
 
 
-const std::function<bool()> &nbPDep_AvailableOnNames::getIsSatisfiedFunction() {
-    static const std::function<bool()> resolveFunc = [depTargets = depTargets](){
-       return hIsSatisfied<nbProperty, nbIBoolValProperty>(depTargets);
-    };
-    return resolveFunc;
-}
-
-const nbEDependencyGroupKind_InRecipe nbPDep_AvailableOnNames::getDepGroupKind() {
-    return nbEDependencyGroupKind_InRecipe::Availability;
-}
+// const std::function<bool()> &nbPDep_AvailableOnNames::getIsSatisfiedFunction() {
+//    static const std::function<bool()> resolveFunc = [depTargets = depTargets](){
+//       return hIsSatisfied<nbProperty, nbIBoolValProperty>(depTargets);
+//    };
+//    return resolveFunc;
+//}
+//

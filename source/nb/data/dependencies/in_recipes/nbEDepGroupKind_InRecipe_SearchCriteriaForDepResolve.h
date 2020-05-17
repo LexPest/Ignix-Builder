@@ -1,0 +1,19 @@
+//
+// Created by Alexey Mihailov on 17/05/2020.
+//
+
+#ifndef NERP_BUILDER_WX_NBEDEPGROUPKIND_INRECIPE_SEARCHCRITERIAFORDEPRESOLVE_H
+#define NERP_BUILDER_WX_NBEDEPGROUPKIND_INRECIPE_SEARCHCRITERIAFORDEPRESOLVE_H
+
+
+
+namespace nerp {
+    enum class nbEDepGroupKind_InRecipe_SearchCriteriaForDepResolve {
+        ByEMacro_s,
+        ByName_s
+    };
+}
+
+
+
+#endif //NERP_BUILDER_WX_NBEDEPGROUPKIND_INRECIPE_SEARCHCRITERIAFORDEPRESOLVE_H

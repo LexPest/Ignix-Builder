@@ -15,7 +15,7 @@ class nbDependency;
 
     struct nbFeature {
         std::string CName;
-        std::string EMacroName;
+        std::string CEMacroName;
         std::string RichDescription;
         std::vector<nbDependency> RequiredDependencies;
 

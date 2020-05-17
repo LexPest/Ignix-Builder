@@ -8,13 +8,10 @@
 #include "nbFDep_AvailableOnNames.h"
 
 
-const std::function<bool()> &nerp::nbFDep_AvailableOnNames::getIsSatisfiedFunction() {
-    static const std::function<bool()> resolveFunc = [depTargets = depTargets](){
-        return hIsSatisfied<nbFeature, nbFeature>(depTargets);
-    };
-    return resolveFunc;
-}
-
-const nerp::nbEDependencyGroupKind_InRecipe nerp::nbFDep_AvailableOnNames::getDepGroupKind() {
-    return nbEDependencyGroupKind_InRecipe::Availability;
-}
+//const std::function<bool()> &nerp::nbFDep_AvailableOnNames::getIsSatisfiedFunction() {
+//    static const std::function<bool()> resolveFunc = [depTargets = depTargets](){
+//        return hIsSatisfied<nbFeature, nbFeature>(depTargets);
+//    };
+//    return resolveFunc;
+//}
+//

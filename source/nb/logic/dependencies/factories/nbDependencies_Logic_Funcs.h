@@ -8,8 +8,6 @@
 
 #include <yaml-cpp/node/node.h>
 #include <memory>
-#include <nb/data/dependencies/in_recipes/nbFeatureDependency.h>
-#include <nb/data/dependencies/in_recipes/nbPropertyDependency.h>
 #include <nb/data/dependencies/in_recipes/nbTargetsContainedDependency.h>
 
 namespace nerp {
@@ -32,8 +30,8 @@ namespace nerp {
     }
 
 
-    std::shared_ptr<nbFeatureDependency> constructFeatureDependency(const YAML::Node &parNode);
-    std::shared_ptr<nbPropertyDependency> constructPropertyDependency(const YAML::Node &parNode);
+    //std::shared_ptr<nbFeatureDependency> constructFeatureDependency(const YAML::Node &parNode);
+    //std::shared_ptr<nbPropertyDependency> constructPropertyDependency(const YAML::Node &parNode);
 }
 
 

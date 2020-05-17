@@ -12,18 +12,22 @@
 #include <list>
 #include <utility>
 #include <yaml-cpp/node/node.h>
-#include <nb/data/dependencies/in_recipes/nbPropertyDependency.h>
 #include <nb/data/dependencies/in_recipes/nbTargetsContainedDependency.h>
-#include <nb/data/project/nbProject.h>
+#include <nb/data/dependencies/in_recipes/nbDependency_InRecipe.h>
+#include <nb/data/features/nbFeature.h>
+#include <nb/data/dependencies/in_recipes/nbEDepGroupKind_InRecipe_DepTarget.h>
+#include <nb/data/dependencies/in_recipes/nbEDepGroupKind_InRecipe_DepParam.h>
+#include <nb/data/dependencies/in_recipes/nbEDepGroupKind_InRecipe_ByDepParam.h>
 
-namespace nerp {
-    class nbPDep_AvailableOnNames : public nbPropertyDependency, public nbTargetsContainedDependency<nbProperty> {
-    public:
-        const std::function<bool()> &getIsSatisfiedFunction() override;
-
-        const nbEDependencyGroupKind_InRecipe getDepGroupKind() override;
-    };
-}
+//namespace nerp {
+//    class nbPDep_AvailableOnNames : public nbDependency_InRecipe<nbEDepGroupKind_InRecipe_DepTarget::Property,
+//            nbEDepGroupKind_InRecipe_DepParam::Availability, nbEDepGroupKind_InRecipe_ByDepParam::Availability>
+//            , public nbTargetsContainedDependency<nbProperty> {
+//    public:
+//         const std::function<bool()> &getIsSatisfiedFunction() override;
+//
+//    };
+//}
 
 
 #endif //NERP_BUILDER_WX_NBPDEP_AVAILABLEONNAMES_H

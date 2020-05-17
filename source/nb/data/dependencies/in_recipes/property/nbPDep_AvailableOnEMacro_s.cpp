@@ -45,13 +45,10 @@
 //}
 
 
-const std::function<bool()> &nerp::nbPDep_AvailableOnEMacro_s::getIsSatisfiedFunction() {
-    static const std::function<bool()> resolveFunc = [depTargets = depTargets](){
-        return hIsSatisfied<nbProperty, nbIBoolValProperty>(depTargets);
-    };
-    return resolveFunc;
-}
-
-const nerp::nbEDependencyGroupKind_InRecipe nerp::nbPDep_AvailableOnEMacro_s::getDepGroupKind() {
-    return nbEDependencyGroupKind_InRecipe::Availability;
-}
+// const std::function<bool()> &nerp::nbPDep_AvailableOnEMacro_s::getIsSatisfiedFunction() {
+//    static const std::function<bool()> resolveFunc = [depTargets = depTargets](){
+//        return hIsSatisfied<nbProperty, nbIBoolValProperty>(depTargets);
+//    };
+//    return resolveFunc;
+//}
+//
