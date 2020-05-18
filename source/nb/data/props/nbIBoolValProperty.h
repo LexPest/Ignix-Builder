@@ -11,6 +11,7 @@ namespace nerp {
     class nbIBoolValProperty : public nbProperty {
     public:
         virtual bool getBoolValue() = 0;
+        virtual bool setBoolValue() = 0;
     };
 }
 
