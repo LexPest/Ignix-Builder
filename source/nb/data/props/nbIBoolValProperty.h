@@ -8,7 +8,7 @@
 #include "nbProperty.h"
 
 namespace nerp {
-    class nbIBoolValProperty : public nbProperty {
+    class nbIBoolValProperty {
     public:
         virtual bool getBoolValue() = 0;
         virtual bool setBoolValue() = 0;

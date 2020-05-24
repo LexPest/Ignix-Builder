@@ -8,26 +8,25 @@
 
 #include <yaml-cpp/node/node.h>
 #include <memory>
-#include <nb/data/dependencies/in_recipes/nbTargetsContainedDependency.h>
 
 namespace nerp {
 
-    template<typename TARGET_T>
-    void fillDependenciesListOnTarget_s(nbTargetsContainedDependency<TARGET_T>& parTargetDep, const YAML::Node &parTargetsNode) {
-        std::list<std::pair<std::string, std::shared_ptr<TARGET_T>>>& depTargets = &parTargetDep.depTargets;
-
-        auto addPairFunc = [&] (const std::string& depTargetString) {
-            parTargetDep.push_back(std::pair<std::string, std::shared_ptr<TARGET_T>>(depTargetString, nullptr));
-        };
-
-        if (parTargetsNode.IsSequence()){
-            for (size_t i = 0; i < parTargetsNode.size(); i++){
-                addPairFunc(parTargetsNode[i].as<std::string>());
-            }
-        } else {
-            addPairFunc(parTargetsNode.as<std::string>());
-        }
-    }
+//    template<typename TARGET_T>
+//    void fillDependenciesListOnTarget_s(nbTargetsContainedDependency<TARGET_T>& parTargetDep, const YAML::Node &parTargetsNode) {
+//        std::list<std::pair<std::string, std::shared_ptr<TARGET_T>>>& depTargets = &parTargetDep.depTargets;
+//
+//        auto addPairFunc = [&] (const std::string& depTargetString) {
+//            parTargetDep.push_back(std::pair<std::string, std::shared_ptr<TARGET_T>>(depTargetString, nullptr));
+//        };
+//
+//        if (parTargetsNode.IsSequence()){
+//            for (size_t i = 0; i < parTargetsNode.size(); i++){
+//                addPairFunc(parTargetsNode[i].as<std::string>());
+//            }
+//        } else {
+//            addPairFunc(parTargetsNode.as<std::string>());
+//        }
+//    }
 
 
     //std::shared_ptr<nbFeatureDependency> constructFeatureDependency(const YAML::Node &parNode);

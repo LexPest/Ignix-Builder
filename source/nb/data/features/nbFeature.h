@@ -10,6 +10,8 @@
 #include <vector>
 #include "nb/data/props/nbPropertyGroup.h"
 #include <nb/data/dependencies/nbDependency.h>
+#include <ness/data/Property.h>
+
 namespace nerp {
 class nbDependency;
 
@@ -22,7 +24,7 @@ class nbDependency;
         std::list<nbFeature> ChildFeatures;
         std::list<nbPropertyGroup> PropertyGroups;
 
-        bool IsAvailable;
+        Property<bool> IsAvailable;
         bool IsEnabled;
 
         bool getBoolValue() {return IsEnabled;}
