@@ -14,10 +14,11 @@
 #include <tuple>
 #include <boost/any.hpp>
 #include <nb/data/dependencies/nbEDepGroupKind_ByDepParam.h>
-#include <nb/data/dependencies/nbEDepGroupKind_DepTarget_Type.h>
 #include <nb/data/dependencies/nbEDepGroupKind_DepParam.h>
 #include <nb/data/dependencies/nbEDepGroupKind_SearchCriteriaForDepResolve.h>
 #include <nb/data/features/nbFeature.h>
+#include <yaml-cpp/node/node.h>
+#include <nb/consts/nbProjectStructConsts.h>
 
 namespace nerp {
 
@@ -38,15 +39,13 @@ namespace nerp {
     class ResolvedDependency {
     public:
         nbEDepGroupKind_ByDepParam byDepParamValue;
-        nbEDepGroupKind_DepTarget_Type depTarget;
 
-        ResolvedDependency(nbEDepGroupKind_ByDepParam byDepParamValue, nbEDepGroupKind_DepTarget_Type depTarget);
+        ResolvedDependency(nbEDepGroupKind_ByDepParam byDepParamValue);
 
         virtual bool isSatisfied() = 0;
     };
 
     template<nbEDepGroupKind_ByDepParam tByDepParamVal,
-            nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
             typename DEP_ON_TARGET_T>
     struct gen_isSatisfied_impl{
         static bool _invoke(const std::shared_ptr<DEP_ON_TARGET_T> parTarget){
@@ -54,17 +53,17 @@ namespace nerp {
         };
     };
 
-    template<nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
+    template<
             typename DEP_ON_TARGET_T>
-    struct gen_isSatisfied_impl<nbEDepGroupKind_ByDepParam::Availability, tDepOnTargetKind, DEP_ON_TARGET_T>{
+    struct gen_isSatisfied_impl<nbEDepGroupKind_ByDepParam::Availability, DEP_ON_TARGET_T>{
         static bool _invoke(const std::shared_ptr<DEP_ON_TARGET_T> parTarget){
             return parTarget->IsAvailable.get();
         };
     };
 
-    template<nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
+    template<
             typename DEP_ON_TARGET_T>
-    struct gen_isSatisfied_impl<nbEDepGroupKind_ByDepParam::IsBoolActive, tDepOnTargetKind, DEP_ON_TARGET_T>{
+    struct gen_isSatisfied_impl<nbEDepGroupKind_ByDepParam::IsBoolActive, DEP_ON_TARGET_T>{
         static bool _invoke(const std::shared_ptr<DEP_ON_TARGET_T> parTarget){
             return parTarget->getBoolValue();
         };
@@ -72,17 +71,16 @@ namespace nerp {
 
 
     template<nbEDepGroupKind_ByDepParam tByDepParamVal,
-            nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
             typename DEP_ON_TARGET_T>
     class ResolvedDependency_T : public ResolvedDependency {
     public:
         std::shared_ptr<DEP_ON_TARGET_T> depOnTargetElemPtr;
 
         explicit ResolvedDependency_T(const std::shared_ptr<DEP_ON_TARGET_T> &depOnTargetElemPtr) : ResolvedDependency(
-                tByDepParamVal, tDepOnTargetKind), depOnTargetElemPtr(depOnTargetElemPtr) {}
+                tByDepParamVal), depOnTargetElemPtr(depOnTargetElemPtr) {}
 
         bool isSatisfied() override {
-            return gen_isSatisfied_impl<tByDepParamVal, tDepOnTargetKind, DEP_ON_TARGET_T>::_invoke(depOnTargetElemPtr);
+            return gen_isSatisfied_impl<tByDepParamVal, DEP_ON_TARGET_T>::_invoke(depOnTargetElemPtr);
         }
     };
 
@@ -94,20 +92,17 @@ namespace nerp {
        const nbEDepGroupKind_ByDepParam byDepParamValue;
        const nbEDepGroupKind_DepParam depParamValue;
        const nbEDepGroupKind_SearchCriteriaForDepResolve searchCriteriaValue;
-       const nbEDepGroupKind_DepTarget_Type depOnTarget;
 
        virtual std::shared_ptr<ResolvedDependency> callResolve() = 0;
 
        UnresolvedDependency(nbEDepGroupKind_ByDepParam byDepParamValue, nbEDepGroupKind_DepParam depParamValue,
-                            nbEDepGroupKind_SearchCriteriaForDepResolve searchCriteriaValue,
-                            nbEDepGroupKind_DepTarget_Type depOnTarget);
+                            nbEDepGroupKind_SearchCriteriaForDepResolve searchCriteriaValue);
    };
 
     template<
             nbEDepGroupKind_ByDepParam tByDepParamVal,
             nbEDepGroupKind_DepParam tDepParamVal,
             nbEDepGroupKind_SearchCriteriaForDepResolve tSearchCriteriaValue,
-            nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
             typename RESOLVING_INPUT_PARAMs_T,
             typename DEP_ON_TARGET_T>
     class UnresolvedDependency_T;
@@ -115,23 +110,21 @@ namespace nerp {
 
    template<nbEDepGroupKind_SearchCriteriaForDepResolve tSearchCriteriaValue,
            nbEDepGroupKind_ByDepParam tByDepParamVal,
-           nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
            typename RESOLVING_INPUT_PARAMs_T,
            typename DEP_ON_TARGET_T>
    struct gen_resolveDependency_impl{
-        static std::shared_ptr<ResolvedDependency_T<tByDepParamVal, tDepOnTargetKind, DEP_ON_TARGET_T>>
+        static std::shared_ptr<ResolvedDependency_T<tByDepParamVal, DEP_ON_TARGET_T>>
                 _invoke(const RESOLVING_INPUT_PARAMs_T& parResolveParams){
             static_assert(sizeof(RESOLVING_INPUT_PARAMs_T) == 0, "This template shouldn't be instantiated");
         };
    };
 
     template<nbEDepGroupKind_ByDepParam tByDepParamVal,
-            nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
             typename RESOLVING_INPUT_PARAMs_T,
             typename DEP_ON_TARGET_T>
-   struct gen_resolveDependency_impl<nbEDepGroupKind_SearchCriteriaForDepResolve::ByEMacro_s, tByDepParamVal, tDepOnTargetKind,
+   struct gen_resolveDependency_impl<nbEDepGroupKind_SearchCriteriaForDepResolve::ByEMacro_s, tByDepParamVal,
            RESOLVING_INPUT_PARAMs_T, DEP_ON_TARGET_T>{
-       using RESOLVED_DEP_ALIAS = ResolvedDependency_T<tByDepParamVal, tDepOnTargetKind, DEP_ON_TARGET_T>;
+       using RESOLVED_DEP_ALIAS = ResolvedDependency_T<tByDepParamVal, DEP_ON_TARGET_T>;
        static std::shared_ptr<RESOLVED_DEP_ALIAS>
               _invoke(const RESOLVING_INPUT_PARAMs_T& parResolveParams){
            for (std::shared_ptr<DEP_ON_TARGET_T> targetElem : std::get<0>(parResolveParams)){
@@ -144,12 +137,11 @@ namespace nerp {
    };
 
     template<nbEDepGroupKind_ByDepParam tByDepParamVal,
-            nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
             typename RESOLVING_INPUT_PARAMs_T,
             typename DEP_ON_TARGET_T>
-    struct gen_resolveDependency_impl<nbEDepGroupKind_SearchCriteriaForDepResolve::ByName_s, tByDepParamVal, tDepOnTargetKind,
+    struct gen_resolveDependency_impl<nbEDepGroupKind_SearchCriteriaForDepResolve::ByName_s, tByDepParamVal,
             RESOLVING_INPUT_PARAMs_T, DEP_ON_TARGET_T>{
-        using RESOLVED_DEP_ALIAS = ResolvedDependency_T<tByDepParamVal, tDepOnTargetKind, DEP_ON_TARGET_T>;
+        using RESOLVED_DEP_ALIAS = ResolvedDependency_T<tByDepParamVal,  DEP_ON_TARGET_T>;
         static std::shared_ptr<RESOLVED_DEP_ALIAS>
         _invoke(const RESOLVING_INPUT_PARAMs_T& parResolveParams){
             for (std::shared_ptr<DEP_ON_TARGET_T> targetElem : std::get<0>(parResolveParams)){
@@ -165,7 +157,6 @@ namespace nerp {
            nbEDepGroupKind_ByDepParam tByDepParamVal,
            nbEDepGroupKind_DepParam tDepParamVal,
            nbEDepGroupKind_SearchCriteriaForDepResolve tSearchCriteriaValue,
-           nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
            typename RESOLVING_INPUT_PARAMs_T,
            typename DEP_ON_TARGET_T>
    class UnresolvedDependency_T : public UnresolvedDependency{
@@ -173,12 +164,11 @@ namespace nerp {
        typedef DEP_ON_TARGET_T DEP_ON_TARGET_T_value_type;
        RESOLVING_INPUT_PARAMs_T inputParams; // std::tuple<std::shared_ptr<std::list<TARGETs>>, std::string FindStr>
 
-       using resolveDependency_impl_alias = gen_resolveDependency_impl<tSearchCriteriaValue, tByDepParamVal, tDepOnTargetKind, RESOLVING_INPUT_PARAMs_T, DEP_ON_TARGET_T>;
+       using resolveDependency_impl_alias = gen_resolveDependency_impl<tSearchCriteriaValue, tByDepParamVal,  RESOLVING_INPUT_PARAMs_T, DEP_ON_TARGET_T>;
        
        explicit UnresolvedDependency_T(RESOLVING_INPUT_PARAMs_T& parResolvingInputParams) : UnresolvedDependency(tByDepParamVal,
                                                        tDepParamVal,
-                                                       tSearchCriteriaValue,
-                                                       tDepOnTargetKind), inputParams(parResolvingInputParams) {}
+                                                       tSearchCriteriaValue), inputParams(parResolvingInputParams) {}
 
        std::shared_ptr<ResolvedDependency> callResolve() override {
            return resolveDependency_impl_alias::_invoke(inputParams);
@@ -203,11 +193,10 @@ namespace nerp {
                nbEDepGroupKind_ByDepParam tByDepParamVal,
                nbEDepGroupKind_DepParam tDepParamVal,
                nbEDepGroupKind_SearchCriteriaForDepResolve tSearchCriteriaValue,
-               nbEDepGroupKind_DepTarget_Type tDepOnTargetKind,
                typename RESOLVING_INPUT_PARAMs_T,
                typename DEP_ON_TARGET_T>
        void addDependency(RESOLVING_INPUT_PARAMs_T tParResolvingInputParams){
-           using UNRESOLVED_DEP_ALIAS = UnresolvedDependency_T<tByDepParamVal, tDepParamVal, tSearchCriteriaValue, tDepOnTargetKind, RESOLVING_INPUT_PARAMs_T, DEP_ON_TARGET_T>;
+           using UNRESOLVED_DEP_ALIAS = UnresolvedDependency_T<tByDepParamVal, tDepParamVal, tSearchCriteriaValue, RESOLVING_INPUT_PARAMs_T, DEP_ON_TARGET_T>;
            std::shared_ptr<UNRESOLVED_DEP_ALIAS>
                 unresolvedDep = std::make_shared<UNRESOLVED_DEP_ALIAS>(tParResolvingInputParams);
            std::shared_ptr<UnresolvedDependency> convPtr = std::static_pointer_cast<UnresolvedDependency>(unresolvedDep);
@@ -228,6 +217,55 @@ namespace nerp {
                 possibleResolvedLists->second.push_back(std::move(resolvedDep));
             }
        }
+
+       void calculateInitialElementValues(){
+
+       }
+
+       void injectAutoDependencyCalcFunctionsIntoProperties(){
+
+       }
+
+   private:
+       bool is_operation_locked = false;
+   };
+
+
+   class DependencyRelatedElementData{
+   public:
+       bool FirstTimeEvaluated = false;
+       std::list<std::shared_ptr<InvokeFunctionHandlerMeta>> OnChangePropertyInvokeFuncsHandlers;
+       std::shared_ptr<DependenciesForConcreteElement> DependenciesForElement;
+
+       explicit DependencyRelatedElementData(const std::shared_ptr<DependenciesForConcreteElement> &parDependenciesForElement){
+           if (parDependenciesForElement == nullptr){
+               DependenciesForElement = std::make_shared<DependenciesForConcreteElement>();
+           } else {
+               DependenciesForElement = parDependenciesForElement;
+           }
+       }
+   };
+
+   class nbProjectDependenciesResolver{
+   private:
+       std::map<std::shared_ptr<boost::any>, std::shared_ptr<DependencyRelatedElementData>> RegisteredDependencyRelatedElements;
+
+       void addDependency(const std::shared_ptr<boost::any>& parTargetElement, const YAML::Node& parDependencyNode){
+           auto foundEntity = RegisteredDependencyRelatedElements.find(parTargetElement);
+           if (foundEntity == RegisteredDependencyRelatedElements.end()){
+               std::shared_ptr<DependencyRelatedElementData> depRelatedElemData = std::make_shared<DependencyRelatedElementData>(nullptr);
+               RegisteredDependencyRelatedElements.insert(std::make_pair(parTargetElement, std::move(depRelatedElemData)));
+               foundEntity = RegisteredDependencyRelatedElements.find(parTargetElement);
+           }
+
+           auto depsForElement = foundEntity->second->DependenciesForElement;
+           std::string depKindString = parDependencyNode[nb_consts::depends::YAML_DEPENDENCY_KIND_KEY_NAME].as<std::string>();
+
+           if (depKindString == nb_consts::depends::YAML_FEATURE_DEPENDS_TYPE_FEATURE_AVAIL_ON_EMACRO){
+        //     depsForElement->addDependency<nbEDepGroupKind_ByDepParam::>()
+           }
+
+       }
    };
 
 
@@ -235,7 +273,7 @@ namespace nerp {
     // Test templates usage
 
 
-    class nbProjectDependenciesResolver {
+    class nbProjectDependenciesResolver_Example {
 
         void Example(){
            // ResolvedElementDependency<nbFeature> r = ResolvedElementDependency<nbFeature>(nullptr);
@@ -246,13 +284,34 @@ namespace nerp {
            nbEDepGroupKind_ByDepParam::Availability,
                     nbEDepGroupKind_DepParam::SetBoolActive,
                     nbEDepGroupKind_SearchCriteriaForDepResolve::ByEMacro_s,
-                    nbEDepGroupKind_DepTarget_Type::SingleEntity,
                    std::tuple<std::list<std::shared_ptr<nbFeature>>, std::string>, nbFeature>(tuple);
 
            std::shared_ptr<UnresolvedDependency> unresDep = e.UnresolvedDependencies.front();
            e.resolveAllDependencies();
         }
     };
+
+
+    struct g_ResolveDependency{
+        virtual boost::any resolve(std::tuple<std::list<boost::any>, boost::any>) = 0;
+    };
+
+    template<nbEDepGroupKind_SearchCriteriaForDepResolve tSearchCriteriaValue>
+    struct g_impl_ResolveDependency : g_ResolveDependency{
+        boost::any resolve(std::tuple<std::list<boost::any>, boost::any> tuple) override {
+            static_assert(sizeof(decltype(tSearchCriteriaValue)) == 0, "This template shouldn't be instantiated");
+        }
+    };
+
+    template<>
+    struct g_impl_ResolveDependency<nbEDepGroupKind_SearchCriteriaForDepResolve::ByName_s> : g_ResolveDependency{
+        boost::any resolve(std::tuple<std::list<boost::any>, boost::any> tuple) override {
+
+        }
+    };
 }
+
+
+
 
 #endif //NERP_BUILDER_WX_NBPROJECTDEPENDENCIESRESOLVER_H

@@ -20,14 +20,14 @@ features :
               emacro: "DEP_CHKBOX_1"
               data : True
               deps:
-                -  type: "available_on_names"
+                -  kind: "prop $ available"
                    target: ["DEP_CHKBOX_2"]
             - type : "chkbox"
               name : "Dependence Chkbox 2"
               emacro: "DEP_CHKBOX_2", data : true
               data : False
               deps:
-                - type: "available_on_emacro_s"
+                - kind: "prop_available_on_emacro_s"
                   target: ["DEP_CHKBOX_3"]
             - type : "chkbox"
               name : "Dependence Chkbox 3"
@@ -39,7 +39,7 @@ features :
       emacro: "E_TEST_EMPTY_EXAMPLE"
       richdescr: null
       deps:
-        - type : "available_on_names"
+        - kind : "feature_available_on_names"
           target : ["Base Test Feature"]
       features:
       prop_groups:

@@ -21,6 +21,15 @@ namespace nerp {
             //...
         }
 
+        namespace depends {
+            const std::string YAML_DEPENDENCY_KIND_KEY_NAME = "kind";
+            const std::string YAML_FEATURE_DEPENDS_TYPE_PROP_AVAIL_ON_NAME = "prop_available_on_names";
+            const std::string YAML_FEATURE_DEPENDS_TYPE_PROP_AVAIL_ON_EMACRO = "prop_available_on_emacro_s";
+            const std::string YAML_FEATURE_DEPENDS_TYPE_FEATURE_AVAIL_ON_NAME = "feature_available_on_names";
+            const std::string YAML_FEATURE_DEPENDS_TYPE_FEATURE_AVAIL_ON_EMACRO = "feature_available_on_emacro_s";
+            const std::string YAML_FEATURE_DEPENDS_TARGET_ARR = "target";
+        }
+
         namespace recipe{
             const std::string YAML_FIELD_FORMAT_VER = "format-version";
             const std::string YAML_FIELD_ITERACTION_VERSION = "iteration-version";
@@ -34,11 +43,7 @@ namespace nerp {
                 const std::string YAML_FIELD_FEATURE_DEPS_ARR = "deps";
                 const std::string YAML_FIELD_FEATURE_CHILD_FEATURES = "features";
 
-                namespace depends {
-                    const std::string YAML_FEATURE_DEPENDS_TYPE_AVAIL_ON_NAME = "available_on_names";
-                    const std::string YAML_FEATURE_DEPENDS_TYPE_AVAIL_ON_EMACRO = "available_on_emacro_s";
-                    const std::string YAML_FEATURE_DEPENDS_TARGET_ARR = "target";
-                }
+
 
                 const std::string YAML_FIELD_PROP_GROUPS_ARR = "prop_groups";
 
@@ -55,12 +60,7 @@ namespace nerp {
                     const std::string YAML_PROPELEM_RICHDESCR = "richdescr";
 
                     const std::string YAML_PROPELEM_DEPS_ARR = "deps";
-                    namespace depends {
-                        const std::string YAML_PROPELEM_DEPENDS_TYPE_AVAIL_ON_NAME = "available_on_names";
-                        const std::string YAML_PROPELEM_DEPENDS_TYPE_AVAIL_ON_EMACRO = "available_on_emacro_s";
-                        const std::string YAML_PROPELEM_DEPENDS_TARGET_ARR = "target";
 
-                    }
 
                     namespace types {
                         const std::string YAML_PROPELEM_TYPE_STRING = "string";
