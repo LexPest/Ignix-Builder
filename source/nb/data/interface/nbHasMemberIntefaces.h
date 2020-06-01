@@ -11,7 +11,10 @@
 #include <string>
 namespace nerp {
     __NERP_DEF_GENERATE_I_HAS_MEMBER(std::string, Name)
+    __NERP_DEF_GENERATE_I_HAS_MEMBER(std::string, EMacroName)
+
     __NERP_DEF_GENERATE_I_HAS_PROPERTY_MEMBER(bool, IsAvailable)
+    __NERP_DEF_GENERATE_I_HAS_PROPERTY_MEMBER(bool, IsBoolActive)
 }
 
 #endif //NERP_BUILDER_WX_NBHASMEMBERINTEFACES_H
