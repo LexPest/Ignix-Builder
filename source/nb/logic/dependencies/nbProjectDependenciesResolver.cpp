@@ -31,6 +31,25 @@ void nerp::DepElement::resolveAllDependencies(nbProjectDependenciesResolver &ref
     }
 }
 
+void nerp::DepElement::firstValEvaluate() {
+    if (FirstTimeValueEvaluated){
+        throw std::runtime_error("First Val Evaluate can be performed only once! Possible circular dependency.");
+    }
+
+    FirstTimeValueEvaluated = true;
+
+    for (std::map<nbEDepGroupKind_DepParam, ElementDependencyHolderGroup>::iterator it = containedDependencies_By_DepParamGroups.begin();
+         it != containedDependencies_By_DepParamGroups.end(); it++){
+        auto& targetGroup = it->second;
+        //bool isSatisfied = false;
+        targetGroup.evaluateFirstTime(targetElem);
+    }
+}
+
+bool nerp::DepElement::isFirstTimeValueEvaluated() const {
+    return FirstTimeValueEvaluated;
+}
+
 nerp::DependencyAddingParams::DependencyAddingParams(const std::shared_ptr<boost::any> &targetElem,
                                                      const nerp::nbEDepGroupKind_SearchCriteriaForDepResolve eSearchCriteria,
                                                      const nerp::nbEDepGroupKind_ByDepParam eByDepParam,

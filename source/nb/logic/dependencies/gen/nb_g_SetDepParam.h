@@ -15,19 +15,19 @@ namespace nerp {
     #include "../nbTypeAliasesInclude.h"
 
     struct g_SetDepParam {
-        virtual void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) = 0;
+        virtual void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) const = 0;
     };
 
     template<nbEDepGroupKind_DepParam tDepParamVal>
     struct g_impl_SetDepParam : g_SetDepParam {
-        void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) override {
+        void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) const override {
             static_assert(sizeof(decltype(tDepParamVal)) == 0, "This template shouldn't be instantiated");
         }
     };
 
     template<>
     struct g_impl_SetDepParam<nbEDepGroupKind_DepParam::Availability> : g_SetDepParam {
-        void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) override {
+        void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) const override {
             auto availability_containedElem = __NERP_DEF_REINTERPRET_CAST_SHARED_PTR_I_HAS_PROPERTY_MEMBER(IsAvailable,
                                                                                                            parTarget);
             availability_containedElem->set_IsAvailable(parIsSatisfied);
@@ -36,7 +36,7 @@ namespace nerp {
 
     template<>
     struct g_impl_SetDepParam<nbEDepGroupKind_DepParam::SetBoolActive> : g_SetDepParam {
-        void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) override {
+        void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) const override {
             auto boolActive_containedElem = __NERP_DEF_REINTERPRET_CAST_SHARED_PTR_I_HAS_PROPERTY_MEMBER(IsBoolActive,
                                                                                                          parTarget);
             boolActive_containedElem->set_IsBoolActive(parIsSatisfied);
