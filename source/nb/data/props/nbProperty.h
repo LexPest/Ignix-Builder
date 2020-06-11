@@ -15,10 +15,8 @@ namespace nerp {
     struct nbPropertyGroup;
 
     struct nbProperty : __NERP_DEF_INHERIT_I_HAS_MEMBER(Name), __NERP_DEF_INHERIT_I_HAS_PROPERTY_MEMBER(IsAvailable) {
-        nbEPropertyType CType;
         std::string Name;
         std::string EMacroName;
-        std::shared_ptr<nbPropertyGroup> PlacedInGroup;
 
         std::string RichDescription;
         Property<bool> IsAvailable;
@@ -26,9 +24,9 @@ namespace nerp {
         __NERP_DEF_GENERATE_IMPLEMENT_I_HAS_MEMBER(std::string, Name, Name)
         __NERP_DEF_GENERATE_IMPLEMENT_I_HAS_PROPERTY_MEMBER(bool, IsAvailable, IsAvailable)
 
-        nbProperty(nbEPropertyType cType, const std::string &name, const std::string &eMacroName,
-                   const std::shared_ptr<nbPropertyGroup> &placedInGroup);
+        nbProperty(const std::string &name, const std::string &eMacroName) : Name(name), EMacroName(eMacroName) {}
 
+        virtual nbEPropertyType getPropertyType() = 0;
     };
 }
 

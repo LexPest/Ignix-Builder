@@ -11,7 +11,7 @@ namespace nerp {
         UnicodeString,
         NumInteger,
         NumUInteger,
-        NumFloat
+        NumDouble
     };
 }
 

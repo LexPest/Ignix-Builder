@@ -17,7 +17,6 @@
 #include <nb/data/dependencies/nbEDepGroupKind_DepParam.h>
 #include <nb/data/dependencies/nbEDepGroupKind_SearchCriteriaForDepResolve.h>
 #include <nb/data/features/nbFeature.h>
-#include <yaml-cpp/node/node.h>
 #include <nb/consts/nbProjectStructConsts.h>
 #include <boost/pointer_cast.hpp>
 #include <nb/logic/dependencies/gen/nb_g_ResolveDependency.h>
@@ -25,6 +24,8 @@
 #include <nb/logic/dependencies/gen/nb_g_SetDepParam.h>
 #include <set>
 #include <exception>
+#include <iterator>
+#include <algorithm>
 
 namespace nerp {
 
@@ -39,27 +40,6 @@ namespace nerp {
     // SearchCriteriaForDepResolve - what criteria should we use to find the dependency
     // DepTarget - target object type, on which dependency is based
 
-    // = = = = = = = = = = = = = =
-    // Test templates usage
-
-
-    class nbProjectDependenciesResolver_Example {
-
-        void Example() {
-            // ResolvedElementDependency<nbFeature> r = ResolvedElementDependency<nbFeature>(nullptr);
-            // isSatisfied_impl<nbFeature, nbEDepGroupKind_ByDepParam, nbEDepGroupKind_ByDepParam::Availability>::_invoke(r);
-//           DependenciesForConcreteElement e = DependenciesForConcreteElement();
-//           const std::tuple<std::list<std::shared_ptr<nbFeature>>, std::string> tuple;
-//           e.addDependency<
-//           nbEDepGroupKind_ByDepParam::Availability,
-//                    nbEDepGroupKind_DepParam::SetBoolActive,
-//                    nbEDepGroupKind_SearchCriteriaForDepResolve::ByEMacro_s,
-//                   std::tuple<std::list<std::shared_ptr<nbFeature>>, std::string>, nbFeature>(tuple);
-//
-//           std::shared_ptr<UnresolvedDependency> unresDep = e.UnresolvedDependencies.front();
-//           e.resolveAllDependencies();
-        }
-    };
 
 #include "nbTypeAliasesInclude.h"
 
@@ -86,23 +66,25 @@ namespace nerp {
 
         class DepElement {
         private:
-            ElementDependencyHolderGroup &getHolderGroup(nbEDepGroupKind_DepParam parDepParam);
+            inline ElementDependencyHolderGroup &getHolderGroup(nbEDepGroupKind_DepParam parDepParam);
 
         public:
             template<typename CAST_T>
-            std::shared_ptr<CAST_T> get_targetElem() {
+            inline std::shared_ptr<CAST_T> get_targetElem() {
                 return boost::reinterpret_pointer_cast<CAST_T>(targetElem);
             }
 
-            std::shared_ptr<boost::any> get_targetElem() {
+            inline std::shared_ptr<boost::any> get_targetElem() {
                 return targetElem;
             }
 
             void addDependency(const DependencyAddingParams &parAddParams);
 
-            void resolveAllDependencies(nbProjectDependenciesResolver &refProjectDepResolver);
+            void resolveAllDependencies(nbProjectDependenciesResolver &parProjectDepResolver);
+
             void firstValEvaluate();
-            //void bindToDependencyPropertiesChangeEvents(){}
+
+            void bindToDependencyPropertiesChangeEvents();
 
 
             bool isFirstTimeValueEvaluated() const;
@@ -119,7 +101,10 @@ namespace nerp {
 
             bool FirstTimeValueEvaluated = false;
             bool BindedToDependencyPropertiesChangeEvents = false;
+
+            std::list<std::weak_ptr<InvokeFunctionHandlerMeta_NoArg>> RegisteredInvokeFunctionHanldersForBinding;
         };
+
 
         class ElementDependencyHolder {
         public:
@@ -127,12 +112,13 @@ namespace nerp {
 
             bool resolveDependency(nbProjectDependenciesResolver &parProjectDepManager);
 
-            void checkFirstTimeEvaluatedForResolvedDepTarget(){
-                if (ResolvedDepTarget == nullptr){
-                    throw std::runtime_error("Check First Time Evaluated cannot be performed for unresolved dep target");
+            void checkFirstTimeEvaluatedForResolvedDepTarget() {
+                if (ResolvedDepTarget == nullptr) {
+                    throw std::runtime_error(
+                            "Check First Time Evaluated cannot be performed for unresolved dep target");
                 }
 
-                if (!ResolvedDepTarget->isFirstTimeValueEvaluated()){
+                if (!ResolvedDepTarget->isFirstTimeValueEvaluated()) {
                     ResolvedDepTarget->firstValEvaluate();
                 }
             }
@@ -141,11 +127,10 @@ namespace nerp {
                 return gen_IsSatisfied.isSatisfied(ResolvedDepTarget->get_targetElem());
             }
 
-           // void bindCheckFuncForResolvedDepTarget(std::shared_ptr<boost::any> parTargetElemForSettingValue){
-             //
-            //}
-            boost::any getTargetDependentPropertyForBinding(){
-
+            std::shared_ptr<InvokeFunctionHandlerMeta_NoArg>
+            addBindingCheckFuncForResolvedDepTarget(const std::function<void(void)> &parEvalFunction) {
+                return gen_IsSatisfied.addBindingFunctionOnPropChange_NoArg(ResolvedDepTarget->get_targetElem(),
+                                                                            parEvalFunction);
             }
 
             ElementDependencyHolder(const g_ResolveDependency &genResolveDependency,
@@ -193,24 +178,34 @@ namespace nerp {
                 isResolved = isResolvedTmp;
             }
 
-            void evaluateFirstTime(std::shared_ptr<boost::any> parTargetElemForSettingValue){
-                if (!isResolved){
+            void evaluateFirstTime(std::shared_ptr<boost::any> parTargetElemForSettingValue) {
+                if (!isResolved) {
                     throw std::runtime_error("EvaluateFirstTime cannot be performed if deps are not resolved!");
                 }
 
-                for (auto& dep : Dependencies){
+                for (auto &dep : Dependencies) {
                     dep->checkFirstTimeEvaluatedForResolvedDepTarget();
                 }
 
                 setDepParamBasedOnDepSatisfaction(parTargetElemForSettingValue);
             }
 
-            void bindGroupToDependencyPropertiesChangeEvents(std::shared_ptr<boost::any> parTargetElemForSettingValue){
-                for (auto& dep : Dependencies){
+            std::unique_ptr<std::list<std::weak_ptr<InvokeFunctionHandlerMeta_NoArg>>>
+            bindGroupToDependencyPropertiesChangeEvents(std::shared_ptr<boost::any> parTargetElemForSettingValue) {
 
+                const auto setDepParamInvokationLambda = [this, parTargetElemForSettingValue = parTargetElemForSettingValue]() -> void {
+                    setDepParamBasedOnDepSatisfaction(parTargetElemForSettingValue);
+                };
+
+                std::unique_ptr<std::list<std::weak_ptr<InvokeFunctionHandlerMeta_NoArg>>> retList = std::make_unique<std::list<std::weak_ptr<InvokeFunctionHandlerMeta_NoArg>>>();
+
+                for (auto &dep : Dependencies) {
+                    auto retHandler = dep->addBindingCheckFuncForResolvedDepTarget(setDepParamInvokationLambda);
+                    retList->push_back(std::move(retHandler));
                 }
-            }
 
+                return std::move(retList);
+            }
 
 
         private:
@@ -219,10 +214,10 @@ namespace nerp {
             bool isResolved = false;
 
 
-            void setDepParamBasedOnDepSatisfaction(std::shared_ptr<boost::any> parTargetElemForSettingValue){
+            void setDepParamBasedOnDepSatisfaction(std::shared_ptr<boost::any> parTargetElemForSettingValue) {
                 bool _isSatisfied = true;
-                for (auto& dep : Dependencies){
-                    if (!dep->isSatisfied()){
+                for (auto &dep : Dependencies) {
+                    if (!dep->isSatisfied()) {
                         _isSatisfied = false;
                         break;
                     }
@@ -235,15 +230,12 @@ namespace nerp {
 
     }
 
+
     class nbProjectDependenciesResolver {
     private:
         std::map<std::shared_ptr<boost::any>, std::shared_ptr<DepElement>> ProjectDepElementsContainer;
 
-
     public:
-        //void addElementDependencies()
-        //
-
         std::shared_ptr<DepElement> getManagedDepElement_AddIfNotFound(std::shared_ptr<boost::any> parTargetElem) {
             auto foundExisting = ProjectDepElementsContainer.find(parTargetElem);
             if (foundExisting == ProjectDepElementsContainer.end()) {
@@ -252,6 +244,43 @@ namespace nerp {
             }
             return foundExisting->second;
         }
+
+        void addElementDependency(const DependencyAddingParams &parAddParams);
+
+
+        void commitAndSetupProjectDependencies() {
+            if (ProjectDepsCommited) {
+                throw std::runtime_error("Project dependencies can be commited only once!");
+            }
+
+            ProjectDepsCommited = true;
+
+            resolveDependencies();
+            evalFirstTimeInitialValues();
+            bindToPropertyEventsValChangers();
+        }
+
+
+    private:
+        inline void resolveDependencies() {
+            for (auto &depElem : ProjectDepElementsContainer) {
+                depElem.second->resolveAllDependencies(*this);
+            }
+        }
+
+        inline void evalFirstTimeInitialValues() {
+            for (auto &depElem : ProjectDepElementsContainer) {
+                depElem.second->firstValEvaluate();
+            }
+        }
+
+        inline void bindToPropertyEventsValChangers() {
+            for (auto &depElem : ProjectDepElementsContainer) {
+                depElem.second->bindToDependencyPropertiesChangeEvents();
+            }
+        }
+
+        bool ProjectDepsCommited = false;
     };
 }
 

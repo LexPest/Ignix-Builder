@@ -22,12 +22,10 @@ namespace nerp {
         }
 
         namespace depends {
-            const std::string YAML_DEPENDENCY_KIND_KEY_NAME = "kind";
-            const std::string YAML_FEATURE_DEPENDS_TYPE_PROP_AVAIL_ON_NAME = "prop_available_on_names";
-            const std::string YAML_FEATURE_DEPENDS_TYPE_PROP_AVAIL_ON_EMACRO = "prop_available_on_emacro_s";
-            const std::string YAML_FEATURE_DEPENDS_TYPE_FEATURE_AVAIL_ON_NAME = "feature_available_on_names";
-            const std::string YAML_FEATURE_DEPENDS_TYPE_FEATURE_AVAIL_ON_EMACRO = "feature_available_on_emacro_s";
-            const std::string YAML_FEATURE_DEPENDS_TARGET_ARR = "target";
+            const std::string YAML_DEPENDENCY_DEP_PARAM_KEY_NAME = "dep_param";
+            const std::string YAML_DEPENDENCY_DEP_CONDITION_KEY_NAME = "dep_condition";
+            const std::string YAML_DEPENDENCY_TARGET_KIND_KEY_NAME = "target_kind";
+            const std::string YAML_DEPENDENCY_TARGET_REF_KEY_NAME = "target";
         }
 
         namespace recipe{

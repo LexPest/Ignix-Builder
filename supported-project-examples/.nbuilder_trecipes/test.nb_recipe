@@ -20,26 +20,33 @@ features :
               emacro: "DEP_CHKBOX_1"
               data : True
               deps:
-                -  kind: "prop $ available"
-                   target: ["DEP_CHKBOX_2"]
+                -  dep_param : "availability"
+                   dep_condition : "on_target_availability"
+                   target_kind : "property_by_emacro"
+                   target: "DEP_CHKBOX_2"
             - type : "chkbox"
               name : "Dependence Chkbox 2"
               emacro: "DEP_CHKBOX_2", data : true
               data : False
               deps:
-                - kind: "prop_available_on_emacro_s"
-                  target: ["DEP_CHKBOX_3"]
+                -  dep_param : "availability"
+                   dep_condition : "on_target_availability"
+                   target_kind : "property_by_name"
+                   target: "Dependence Chkbox 3"
             - type : "chkbox"
               name : "Dependence Chkbox 3"
               emacro: "DEP_CHKBOX_3"
               data : True
               deps:
 
-    - name: "Empty Test Feature"
+
+    - name: "Empty Dependent Test Feature"
       emacro: "E_TEST_EMPTY_EXAMPLE"
       richdescr: null
       deps:
-        - kind : "feature_available_on_names"
-          target : ["Base Test Feature"]
+        - dep_param : "enabled"
+          dep_condition : "on_target_enabled"
+          target_kind : "feature_by_emacro"
+          target : "E_TEST_BASE"
       features:
       prop_groups:

@@ -21,8 +21,8 @@ class nbDependency;
         std::string RichDescription;
         std::vector<nbDependency> RequiredDependencies;
 
-        std::list<nbFeature> ChildFeatures;
-        std::list<nbPropertyGroup> PropertyGroups;
+        std::list<std::shared_ptr<nbFeature>> ChildFeatures;
+        std::list<std::shared_ptr<nbPropertyGroup>> PropertyGroups;
 
         Property<bool> IsAvailable;
         bool IsEnabled;

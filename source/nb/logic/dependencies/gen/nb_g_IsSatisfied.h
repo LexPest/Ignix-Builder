@@ -15,7 +15,7 @@ namespace nerp {
 
     struct g_IsSatisfied {
         virtual bool isSatisfied(std::shared_ptr<boost::any> parTarget) const = 0;
-        virtual void addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, std::function<void(void)> parFunc) const = 0;
+        virtual std::shared_ptr<InvokeFunctionHandlerMeta_NoArg>  addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, const std::function<void(void)> parFunc) const = 0;
     };
 
     template<nbEDepGroupKind_ByDepParam tByDepParamVal>
@@ -24,7 +24,7 @@ namespace nerp {
             static_assert(sizeof(decltype(tByDepParamVal)) == 0, "This template shouldn't be instantiated");
         }
 
-        void addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, std::function<void(void)> parFunc) const override {
+        std::shared_ptr<InvokeFunctionHandlerMeta_NoArg> addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, const std::function<void(void)> parFunc) const override {
             static_assert(sizeof(decltype(tByDepParamVal)) == 0, "This template shouldn't be instantiated");
         }
     };
@@ -37,10 +37,10 @@ namespace nerp {
             return availabilityContainedElem->get_IsAvailable();
         }
 
-        void addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, std::function<void(void)> parFunc) const override {
+        std::shared_ptr<InvokeFunctionHandlerMeta_NoArg> addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, const std::function<void(void)> parFunc) const override {
             auto availabilityContainedElem = __NERP_DEF_REINTERPRET_CAST_SHARED_PTR_I_HAS_PROPERTY_MEMBER(IsAvailable,
                                                                                                           parTarget);
-            availabilityContainedElem->add_function_to_invoke_on_prop_change_no_arg_IsAvailable(parFunc);
+            return availabilityContainedElem->add_function_to_invoke_on_prop_change_no_arg_IsAvailable(parFunc);
         }
     };
 
@@ -52,10 +52,10 @@ namespace nerp {
             return boolActiveContainedElem->get_IsBoolActive();
         }
 
-        void addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, std::function<void(void)> parFunc) const override {
+        std::shared_ptr<InvokeFunctionHandlerMeta_NoArg> addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, const std::function<void(void)> parFunc) const override {
             auto availabilityContainedElem = __NERP_DEF_REINTERPRET_CAST_SHARED_PTR_I_HAS_PROPERTY_MEMBER(IsBoolActive,
                                                                                                           parTarget);
-            availabilityContainedElem->add_function_to_invoke_on_prop_change_no_arg_IsBoolActive(parFunc);
+             return availabilityContainedElem->add_function_to_invoke_on_prop_change_no_arg_IsBoolActive(parFunc);
         }
     };
 

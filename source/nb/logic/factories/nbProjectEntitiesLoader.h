@@ -15,6 +15,16 @@ namespace nerp {
 
         static std::shared_ptr<nbRecipe>
         getProjectRecipe(nbERecipeKind parRecipeKind, const YAML::Node &parRecipeNodeFile);
+
+        static void parseAndFillFeatures(std::list<std::shared_ptr<nbFeature>>& parFeaturesList, const YAML::Node &parParentFeaturesArrNode);
+
+        static void parseAndFillPropGroups(std::list<std::shared_ptr<nbPropertyGroup>> &parPropGroupsList,
+                                           const YAML::Node &parParentPropGroupsArrNode);
+
+        static void parseAndFillPropsInGroup(std::list<std::shared_ptr<nbProperty>> &parPropsList, const YAML::Node &parPropsArrNode);
+
+        //static void getPropBased
+    private:
     };
 }
 

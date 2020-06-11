@@ -24,10 +24,9 @@ void nerp::DepElement::addDependency(const nerp::DependencyAddingParams &parAddP
     targetGroup.addDependency(parAddParams);
 }
 
-void nerp::DepElement::resolveAllDependencies(nbProjectDependenciesResolver &refProjectDepResolver) {
-    for (std::map<nbEDepGroupKind_DepParam, ElementDependencyHolderGroup>::iterator it = containedDependencies_By_DepParamGroups.begin();
-         it != containedDependencies_By_DepParamGroups.end(); it++){
-        it->second.resolveAll(refProjectDepResolver);
+void nerp::DepElement::resolveAllDependencies(nbProjectDependenciesResolver &parProjectDepResolver) {
+    for (auto & containedDependencies_By_DepParamGroup : containedDependencies_By_DepParamGroups){
+        containedDependencies_By_DepParamGroup.second.resolveAll(parProjectDepResolver);
     }
 }
 
@@ -38,9 +37,8 @@ void nerp::DepElement::firstValEvaluate() {
 
     FirstTimeValueEvaluated = true;
 
-    for (std::map<nbEDepGroupKind_DepParam, ElementDependencyHolderGroup>::iterator it = containedDependencies_By_DepParamGroups.begin();
-         it != containedDependencies_By_DepParamGroups.end(); it++){
-        auto& targetGroup = it->second;
+    for (auto & containedDependencies_By_DepParamGroup : containedDependencies_By_DepParamGroups){
+        auto& targetGroup = containedDependencies_By_DepParamGroup.second;
         //bool isSatisfied = false;
         targetGroup.evaluateFirstTime(targetElem);
     }
@@ -48,6 +46,21 @@ void nerp::DepElement::firstValEvaluate() {
 
 bool nerp::DepElement::isFirstTimeValueEvaluated() const {
     return FirstTimeValueEvaluated;
+}
+
+void nerp::DepElement::bindToDependencyPropertiesChangeEvents() {
+    if (BindedToDependencyPropertiesChangeEvents) {
+        throw std::runtime_error("Cannot bind to dependencies properties change events second time!");
+    }
+
+    BindedToDependencyPropertiesChangeEvents = true;
+
+    for (auto &containedDependencies_By_DepParamGroup : containedDependencies_By_DepParamGroups) {
+        std::unique_ptr<std::list<std::weak_ptr<InvokeFunctionHandlerMeta_NoArg>>> bindHandlers =
+        containedDependencies_By_DepParamGroup.second.bindGroupToDependencyPropertiesChangeEvents(targetElem);
+
+        std::copy(bindHandlers->begin(), bindHandlers->end(), std::back_inserter(RegisteredInvokeFunctionHanldersForBinding));
+    }
 }
 
 nerp::DependencyAddingParams::DependencyAddingParams(const std::shared_ptr<boost::any> &targetElem,
@@ -66,4 +79,9 @@ bool nerp::ElementDependencyHolder::resolveDependency(nerp::nbProjectDependencie
         ResolvedDepTarget = parProjectDepManager.getManagedDepElement_AddIfNotFound(tmpResolvedDepTarget);
     }
     return isResolved;
+}
+
+void nerp::nbProjectDependenciesResolver::addElementDependency(const nerp::DependencyAddingParams &parAddParams) {
+    auto managedDepElement = getManagedDepElement_AddIfNotFound(parAddParams.targetElem);
+    managedDepElement->addDependency(parAddParams);
 }
