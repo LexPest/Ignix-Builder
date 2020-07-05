@@ -21,11 +21,11 @@ namespace nerp {
     template<nbEDepGroupKind_ByDepParam tByDepParamVal>
     struct g_impl_IsSatisfied : g_IsSatisfied {
         bool isSatisfied(std::shared_ptr<boost::any> parTarget) const override {
-            static_assert(sizeof(decltype(tByDepParamVal)) == 0, "This template shouldn't be instantiated");
+//            static_assert(sizeof(decltype(tByDepParamVal)) == 0, "This template shouldn't be instantiated");
         }
 
         std::shared_ptr<InvokeFunctionHandlerMeta_NoArg> addBindingFunctionOnPropChange_NoArg(std::shared_ptr<boost::any> parTarget, const std::function<void(void)> parFunc) const override {
-            static_assert(sizeof(decltype(tByDepParamVal)) == 0, "This template shouldn't be instantiated");
+//            static_assert(sizeof(decltype(tByDepParamVal)) == 0, "This template shouldn't be instantiated");
         }
     };
 

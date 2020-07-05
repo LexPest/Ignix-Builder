@@ -21,7 +21,7 @@ namespace nerp {
     template<nbEDepGroupKind_DepParam tDepParamVal>
     struct g_impl_SetDepParam : g_SetDepParam {
         void setDepParam(std::shared_ptr<boost::any> parTarget, bool parIsSatisfied) const override {
-            static_assert(sizeof(decltype(tDepParamVal)) == 0, "This template shouldn't be instantiated");
+//            static_assert(sizeof(decltype(tDepParamVal)) == 0, "This template shouldn't be instantiated");
         }
     };
 

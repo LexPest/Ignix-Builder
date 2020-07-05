@@ -20,7 +20,7 @@ namespace nerp {
     struct g_impl_ResolveDependency : g_ResolveDependency {
         std::shared_ptr<boost::any>
         resolve(ResolveParamsTuple_T parTuple) const override {
-            static_assert(sizeof(decltype(tSearchCriteriaValue)) == 0, "This template shouldn't be instantiated");
+            //static_assert(sizeof(decltype(tSearchCriteriaValue)) == 0, "This template shouldn't be instantiated");
         }
     };
 
