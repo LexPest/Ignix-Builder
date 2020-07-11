@@ -8,6 +8,26 @@
 #include <memory>
 #include <yaml-cpp/yaml.h>
 #include "nb/data/project/nbProject.h"
+#include <nb/data/props/nbEPropertyType.h>
+#include <map>
+
+namespace {
+    using namespace nerp;
+    const static std::map<std::string, nbEPropertyType> Mapped_StringToEPropertyType = {
+            {"string", nbEPropertyType::UnicodeString},
+            {"chkbox", nbEPropertyType::BoolFlag},
+            {"numeric_double", nbEPropertyType::NumDouble},
+            {"numeric_signed_integer", nbEPropertyType::NumInteger},
+            {"numeric_unsigned_integer", nbEPropertyType::NumUInteger}
+    };
+
+    const static std::map<std::string, bool> Mapped_StringToChkboxBoolData = {
+            {"false", false},
+            {"true", true}
+    };
+}
+
+
 namespace nerp {
     class nbProjectEntitiesLoader {
     public:
@@ -25,6 +45,14 @@ namespace nerp {
 
         //static void getPropBased
     private:
+        inline static nbEPropertyType getPropertyTypeFromString(const std::string& parLoweredString) {
+            return Mapped_StringToEPropertyType.at(parLoweredString);
+        }
+
+        inline static bool getChkboxBoolValueFromString(const std::string& parLoweredString){
+            return Mapped_StringToChkboxBoolData.at(parLoweredString);
+        }
+
     };
 }
 

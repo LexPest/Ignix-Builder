@@ -15,6 +15,7 @@ namespace nerp {
         nbEPropertyType getPropertyType() override;
 
         nbProperty_BoolFlag(const std::string &name, const std::string &eMacroName, bool boolValue);
+
     };
 }
 

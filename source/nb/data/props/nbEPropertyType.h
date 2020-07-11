@@ -7,6 +7,7 @@
 
 namespace nerp {
     enum class nbEPropertyType : int8_t {
+        _Undefined,
         BoolFlag,
         UnicodeString,
         NumInteger,

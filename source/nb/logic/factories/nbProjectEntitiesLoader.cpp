@@ -4,6 +4,13 @@
 
 #include "nbProjectEntitiesLoader.h"
 #include <nb/consts/nbProjectStructConsts.h>
+#include <boost/algorithm/string.hpp>
+#include <nb/data/props/concrete_types/nbProperty_BoolFlag.h>
+#include <nb/data/props/concrete_types/nbProperty_UnicodeString.h>
+#include <nb/data/props/concrete_types/nbProperty_NumInteger.h>
+#include <nb/data/props/concrete_types/nbProperty_NumUInteger.h>
+#include <nb/data/props/concrete_types/nbProperty_NumDouble.h>
+
 using namespace nerp;
 std::shared_ptr<nbProject> nbProjectEntitiesLoader::getProjectFromYAML(const YAML::Node &parProjectSupportNodeFile) {
     Version minSupportedVer = parProjectSupportNodeFile[nb_consts::support::YAML_FIELD_NBVERSION].as<std::string>();
@@ -37,6 +44,8 @@ void nbProjectEntitiesLoader::parseAndFillFeatures(std::list<std::shared_ptr<nbF
         feature->IsAvailable.set(true);
         parseAndFillPropGroups(feature->PropertyGroups, currentNode[nb_consts::recipe::feature::YAML_FIELD_PROP_GROUPS_ARR]);
 
+        //TODO: deps loading
+
         //recursion here
         parseAndFillFeatures(feature->ChildFeatures, currentNode[nb_consts::recipe::feature::YAML_FIELD_FEATURE_CHILD_FEATURES]);
 
@@ -56,8 +65,58 @@ void nbProjectEntitiesLoader::parseAndFillPropGroups(std::list<std::shared_ptr<n
 
 void nbProjectEntitiesLoader::parseAndFillPropsInGroup(std::list<std::shared_ptr<nbProperty>> &parPropsList,
                                                        const YAML::Node &parPropsArrNode) {
-    
+    for (const auto & currentNode : parPropsArrNode){
+        std::string propTypeInString = currentNode[nb_consts::recipe::feature::propelem::YAML_PROPELEM_TYPE].as<std::string>();
+        boost::algorithm::to_lower(propTypeInString);
+
+        std::string propName = currentNode[nb_consts::recipe::feature::propelem::YAML_PROPELEM_NAME].as<std::string>();
+        std::string propEMacro = currentNode[nb_consts::recipe::feature::propelem::YAML_PROPELEM_EMACRO].as<std::string>();
+        std::string dataInString = currentNode[nb_consts::recipe::feature::propelem::YAML_PROPELEM_EMACRO].as<std::string>();
+        //TODO: deps loading
+
+        //TODO: conversion exception handling
+        nbEPropertyType parsedPropType = getPropertyTypeFromString(propTypeInString);
+
+        std::shared_ptr<nbProperty> createdProp;
+
+        switch (parsedPropType){
+            case nbEPropertyType::BoolFlag: {
+                boost::algorithm::to_lower(dataInString);
+                bool dataVal = getChkboxBoolValueFromString(dataInString);
+                createdProp = std::make_shared<nbProperty_BoolFlag>(propName, propEMacro, dataVal);
+                break;
+            }
+            case nbEPropertyType::UnicodeString: {
+                createdProp = std::make_shared<nbProperty_UnicodeString>(propName, propEMacro, dataInString);
+                break;
+            }
+            case nbEPropertyType::NumInteger: {
+                int64_t dataVal;
+                std::istringstream iss(dataInString);
+                iss >> dataVal;
+                createdProp = std::make_shared<nbProperty_NumInteger>(propName, propEMacro, dataVal);
+                break;
+            }
+            case nbEPropertyType::NumUInteger: {
+                uint64_t dataVal;
+                std::istringstream iss(dataInString);
+                iss >> dataVal;
+                createdProp = std::make_shared<nbProperty_NumUInteger>(propName, propEMacro, dataVal);
+                break;
+            }
+            case nbEPropertyType::NumDouble: {
+                double dataVal;
+                std::istringstream iss(dataInString);
+                iss >> dataVal;
+                createdProp = std::make_shared<nbProperty_NumDouble>(propName, propEMacro, dataVal);
+                break;
+            }
+        }
+
+        //TODO createdProp -> to list
+    }
 }
+
 
 
 
