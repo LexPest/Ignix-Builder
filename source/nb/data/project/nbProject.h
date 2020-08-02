@@ -9,7 +9,7 @@
 #include <string>
 #include <list>
 #include "nb/logic/nbProjectWorker.h"
-#include "nb/logic/nbOpenedProjectHandler.h"
+#include "nb/logic/opened_handlers/nbOpenedProjectHandler.h"
 #include <ness/data/Version.h>
 #include <ness/data/IterVersion.h>
 namespace nerp {

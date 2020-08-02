@@ -5,7 +5,7 @@
 #ifndef NERP_BUILDER_WX_NB_G_RESOLVEDEPENDENCY_H
 #define NERP_BUILDER_WX_NB_G_RESOLVEDEPENDENCY_H
 
-#include <nb/logic/dependencies/nbProjectDependenciesResolver.h>
+#include <nb/logic/dependencies/nbRecipeDependenciesResolver.h>
 
 namespace nerp {
 
@@ -25,7 +25,7 @@ namespace nerp {
     };
 
     template<>
-    struct g_impl_ResolveDependency<nbEDepGroupKind_SearchCriteriaForDepResolve::ByName_s> : g_ResolveDependency {
+    struct g_impl_ResolveDependency<nbEDepGroupKind_SearchCriteriaForDepResolve::ByName> : g_ResolveDependency {
         std::shared_ptr<boost::any>
         resolve(ResolveParamsTuple_T parTuple) const override {
             auto targetElemsList = std::get<0>(parTuple);
@@ -42,7 +42,7 @@ namespace nerp {
     };
 
     template<>
-    struct g_impl_ResolveDependency<nbEDepGroupKind_SearchCriteriaForDepResolve::ByEMacro_s> : g_ResolveDependency {
+    struct g_impl_ResolveDependency<nbEDepGroupKind_SearchCriteriaForDepResolve::ByEMacro> : g_ResolveDependency {
         std::shared_ptr<boost::any>
         resolve(ResolveParamsTuple_T parTuple) const override {
             auto targetElemsList = std::get<0>(parTuple);
@@ -62,8 +62,8 @@ namespace nerp {
     namespace {
 #define __NERP_LOCAL_PLACE_ELEM(type) {type, new g_impl_ResolveDependency<type>()}
         static const std::map<nbEDepGroupKind_SearchCriteriaForDepResolve, const g_ResolveDependency *const> resolveDep_impls =
-                {__NERP_LOCAL_PLACE_ELEM(nbEDepGroupKind_SearchCriteriaForDepResolve::ByName_s),
-                 __NERP_LOCAL_PLACE_ELEM(nbEDepGroupKind_SearchCriteriaForDepResolve::ByEMacro_s)
+                {__NERP_LOCAL_PLACE_ELEM(nbEDepGroupKind_SearchCriteriaForDepResolve::ByName),
+                 __NERP_LOCAL_PLACE_ELEM(nbEDepGroupKind_SearchCriteriaForDepResolve::ByEMacro)
                 };
 #undef __NERP_LOCAL_PLACE_ELEM
     }

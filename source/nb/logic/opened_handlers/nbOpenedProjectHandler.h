@@ -7,15 +7,18 @@
 
 #include <string>
 #include "nb/data/project/nbProject.h"
-#include "nbProjectHandlerIObserver.h"
+#include "nb/logic/nbProjectHandlerIObserver.h"
 #include "nb/data/project/nbRecipe.h"
 #include <ness/interface/IObservable.h>
+#include <nb/logic/dependencies/nbRecipeDependenciesResolver.h>
 namespace nerp {
     struct nbProject;
 
     class nbProjectHandlerIObserver;
 
     struct nbRecipe;
+
+    class nbRecipeDependenciesResolver;
 
     class nbOpenedProjectHandler : IObservable<nbProjectHandlerIObserver> {
     public:
@@ -26,6 +29,10 @@ namespace nerp {
         std::string PathRootUserRecipes;
 
         std::shared_ptr<nbProject> CProject;
+        std::list<std::shared_ptr<nbOpenedRecipeHandler>> OpenedRecipeHandlers;
+       // nbRecipeDependenciesResolver CDepResolver;
+
+      //  std::shared_ptr<std::list<std::shared_ptr<nbFeature>>>
 
         nbOpenedProjectHandler(std::string pathRootFolder, std::string pathNBuilderSupport,
                                std::string pathNBuilderBuildMacro, std::string pathRootTemplateRecipes,

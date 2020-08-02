@@ -2,7 +2,7 @@
 // Created by Alexey Mihailov on 17/05/2020.
 //
 
-#include "nbProjectDependenciesResolver.h"
+#include "nbRecipeDependenciesResolver.h"
 
 
 nerp::ElementDependencyHolderGroup &nerp::DepElement::getHolderGroup(nerp::nbEDepGroupKind_DepParam parDepParam)
@@ -24,7 +24,7 @@ void nerp::DepElement::addDependency(const nerp::DependencyAddingParams &parAddP
     targetGroup.addDependency(parAddParams);
 }
 
-void nerp::DepElement::resolveAllDependencies(nbProjectDependenciesResolver &parProjectDepResolver) {
+void nerp::DepElement::resolveAllDependencies(nbRecipeDependenciesResolver &parProjectDepResolver) {
     for (auto & containedDependencies_By_DepParamGroup : containedDependencies_By_DepParamGroups){
         containedDependencies_By_DepParamGroup.second.resolveAll(parProjectDepResolver);
     }
@@ -72,7 +72,7 @@ nerp::DependencyAddingParams::DependencyAddingParams(const std::shared_ptr<boost
                                                                                                              resolveParamsTuple(
                                                                                                                      resolveParamsTuple) {}
 
-bool nerp::ElementDependencyHolder::resolveDependency(nerp::nbProjectDependenciesResolver &parProjectDepManager) {
+bool nerp::ElementDependencyHolder::resolveDependency(nerp::nbRecipeDependenciesResolver &parProjectDepManager) {
     auto tmpResolvedDepTarget = gen_ResolveDependency.resolve(ResolveParamsTuple);
     if (tmpResolvedDepTarget != nullptr) {
         isResolved = true;
@@ -81,7 +81,7 @@ bool nerp::ElementDependencyHolder::resolveDependency(nerp::nbProjectDependencie
     return isResolved;
 }
 
-void nerp::nbProjectDependenciesResolver::addElementDependency(const nerp::DependencyAddingParams &parAddParams) {
+void nerp::nbRecipeDependenciesResolver::addElementDependency(const nerp::DependencyAddingParams &parAddParams) {
     auto managedDepElement = getManagedDepElement_AddIfNotFound(parAddParams.targetElem);
     managedDepElement->addDependency(parAddParams);
 }

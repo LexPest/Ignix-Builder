@@ -8,8 +8,11 @@
 #include <iostream>
 #include "nb/logic/factories/nbProjectEntitiesLoader.h"
 #include <nb/consts/nbProjectStructConsts.h>
+#include "nb/logic/request_data/nbReqProjectLoadingResult.h"
 
 using namespace nerp;
+
+
 void nbProjectWorker::loadProject(std::function<void(nbReqProjectLoadingResult)> parEndCallback,
                                   const std::string &parAbsoluteProjectPath) {
     std::string outMessage = "NONE";
@@ -42,7 +45,8 @@ void nbProjectWorker::loadProject(std::function<void(nbReqProjectLoadingResult)>
     }
 
 
-    parEndCallback(nbReqProjectLoadingResult(outOpenedProjectHandler, outMessage));
+    auto loadingResult = nbReqProjectLoadingResult(outOpenedProjectHandler, outMessage);
+    parEndCallback(std::move(loadingResult));
 }
 
 void nbProjectWorker::discoverProjectRecipes(nbOpenedProjectHandler &parPrjHandler) {
@@ -51,7 +55,7 @@ void nbProjectWorker::discoverProjectRecipes(nbOpenedProjectHandler &parPrjHandl
     const auto process_recipe_file_fn = [](nbOpenedProjectHandler &parPrjHandler, const boost::filesystem::directory_entry& entry,
                                   nbERecipeKind recipeKind){
         try {
-            auto readRecipe = nbProjectEntitiesLoader::getProjectRecipe(recipeKind, YAML::LoadFile(entry.path().string()));
+            auto readRecipe = nbProjectEntitiesLoader::getProjectRecipe(parPrjHandler, recipeKind, YAML::LoadFile(entry.path().string()));
             addRecipeToProject(parPrjHandler, readRecipe);
         } catch (...){}
     };

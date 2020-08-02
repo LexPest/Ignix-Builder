@@ -18,9 +18,12 @@ namespace nerp {
     class nbIObserverProjectWorker;
 
     struct nbRecipe;
-    struct nbOpenedProjectHandler;
+    class nbOpenedProjectHandler;
     struct nbReqProjectLoadingResult;
-    struct nbReqProjectSavingResult;
+
+   // nbReqProjectLoadingResult::nbReqProjectLoadingResult(const std::shared_ptr<nbOpenedProjectHandler> &loadedProjectHandler,
+   //                           const std::string &message);
+    //struct nbReqProjectSavingResult;
 
 //static
     class nbProjectWorker {

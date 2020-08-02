@@ -22,7 +22,8 @@ features :
               deps:
                 -  dep_param : "availability"
                    dep_condition : "on_target_availability"
-                   target_kind : "property_by_emacro"
+                   target_kind : "property"
+                   target_search_method : "by_emacro"
                    target: "DEP_CHKBOX_2"
             - type : "chkbox"
               name : "Dependence Chkbox 2"
@@ -31,7 +32,8 @@ features :
               deps:
                 -  dep_param : "availability"
                    dep_condition : "on_target_availability"
-                   target_kind : "property_by_name"
+                   target_kind : "property"
+                   target_search_method : "by_name"
                    target: "Dependence Chkbox 3"
             - type : "chkbox"
               name : "Dependence Chkbox 3"
@@ -46,7 +48,8 @@ features :
       deps:
         - dep_param : "enabled"
           dep_condition : "on_target_enabled"
-          target_kind : "feature_by_emacro"
+          target_kind : "feature"
+          target_search_method : "by_emacro"
           target : "E_TEST_BASE"
       features:
       prop_groups:

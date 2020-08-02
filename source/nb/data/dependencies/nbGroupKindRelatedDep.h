@@ -8,7 +8,7 @@
 namespace nerp {
     template<typename GROUP_KIND_T, GROUP_KIND_T val>
     struct nbGroupKindRelatedDep {
-        constexpr GROUP_KIND_T getGroupKind() {return val;}
+        const constexpr GROUP_KIND_T getGroupKind() {return val;}
     };
 }
 

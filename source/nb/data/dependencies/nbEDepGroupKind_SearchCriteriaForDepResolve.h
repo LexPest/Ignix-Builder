@@ -9,8 +9,8 @@
 
 namespace nerp {
     enum class nbEDepGroupKind_SearchCriteriaForDepResolve {
-        ByEMacro_s,
-        ByName_s
+        ByEMacro,
+        ByName
     };
 }
 

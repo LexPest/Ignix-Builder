@@ -2,8 +2,8 @@
 // Created by Alexey Mihailov on 17/05/2020.
 //
 
-#ifndef NERP_BUILDER_WX_NBPROJECTDEPENDENCIESRESOLVER_H
-#define NERP_BUILDER_WX_NBPROJECTDEPENDENCIESRESOLVER_H
+#ifndef NERP_BUILDER_WX_NBRECIPEDEPENDENCIESRESOLVER_H
+#define NERP_BUILDER_WX_NBRECIPEDEPENDENCIESRESOLVER_H
 
 #include <list>
 #include <memory>
@@ -44,7 +44,7 @@ namespace nerp {
 #include "nbTypeAliasesInclude.h"
 
 
-    class nbProjectDependenciesResolver;
+    class nbRecipeDependenciesResolver;
 
     namespace {
 
@@ -80,7 +80,7 @@ namespace nerp {
 
             void addDependency(const DependencyAddingParams &parAddParams);
 
-            void resolveAllDependencies(nbProjectDependenciesResolver &parProjectDepResolver);
+            void resolveAllDependencies(nbRecipeDependenciesResolver &parProjectDepResolver);
 
             void firstValEvaluate();
 
@@ -90,14 +90,14 @@ namespace nerp {
             bool isFirstTimeValueEvaluated() const;
 
             DepElement(const std::shared_ptr<boost::any> &targetElem,
-                       nbProjectDependenciesResolver &refProjectDepResolver) : targetElem(targetElem),
-                                                                               refProjectDepResolver(
+                       nbRecipeDependenciesResolver &refProjectDepResolver) : targetElem(targetElem),
+                                                                              refProjectDepResolver(
                                                                                        refProjectDepResolver) {}
 
         private:
             std::shared_ptr<boost::any> targetElem;
             std::map<nbEDepGroupKind_DepParam, ElementDependencyHolderGroup> containedDependencies_By_DepParamGroups;
-            nbProjectDependenciesResolver &refProjectDepResolver;
+            nbRecipeDependenciesResolver &refProjectDepResolver;
 
             bool FirstTimeValueEvaluated = false;
             bool BindedToDependencyPropertiesChangeEvents = false;
@@ -110,7 +110,7 @@ namespace nerp {
         public:
             bool get_isResolved() { return isResolved; }
 
-            bool resolveDependency(nbProjectDependenciesResolver &parProjectDepManager);
+            bool resolveDependency(nbRecipeDependenciesResolver &parProjectDepManager);
 
             void checkFirstTimeEvaluatedForResolvedDepTarget() {
                 if (ResolvedDepTarget == nullptr) {
@@ -168,7 +168,7 @@ namespace nerp {
             }
 
             //todo: return errcode if not resolved
-            void resolveAll(nbProjectDependenciesResolver &refProjectDepResolver) {
+            void resolveAll(nbRecipeDependenciesResolver &refProjectDepResolver) {
                 bool isResolvedTmp = true;
                 for (const auto &dep : Dependencies) {
                     if (!dep->resolveDependency(refProjectDepResolver)) {
@@ -231,7 +231,7 @@ namespace nerp {
     }
 
 
-    class nbProjectDependenciesResolver {
+    class nbRecipeDependenciesResolver {
     private:
         std::map<std::shared_ptr<boost::any>, std::shared_ptr<DepElement>> ProjectDepElementsContainer;
 
@@ -250,7 +250,7 @@ namespace nerp {
 
         void commitAndSetupProjectDependencies() {
             if (ProjectDepsCommited) {
-                throw std::runtime_error("Project dependencies can be commited only once!");
+                throw std::runtime_error("Project dependencies can be committed only once!");
             }
 
             ProjectDepsCommited = true;
@@ -285,4 +285,4 @@ namespace nerp {
 }
 
 
-#endif //NERP_BUILDER_WX_NBPROJECTDEPENDENCIESRESOLVER_H
+#endif //NERP_BUILDER_WX_NBRECIPEDEPENDENCIESRESOLVER_H
