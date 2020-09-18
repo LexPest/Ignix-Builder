@@ -15,6 +15,8 @@ function(CHECK_GIT_SUBMODULE_AND_BUILD argPath)
     add_subdirectory(${argPath})
 endfunction()
 
+
+
 # Set version
 SET(VERSION_MAJOR 0)
 SET(VERSION_MINOR 1)

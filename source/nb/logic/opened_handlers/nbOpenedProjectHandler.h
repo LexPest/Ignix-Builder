@@ -9,6 +9,7 @@
 #include "nb/data/project/nbProject.h"
 #include "nb/logic/nbProjectHandlerIObserver.h"
 #include "nb/data/project/nbRecipe.h"
+#include "nbOpenedRecipeHandler.h"
 #include <ness/interface/IObservable.h>
 #include <nb/logic/dependencies/nbRecipeDependenciesResolver.h>
 namespace nerp {
@@ -19,6 +20,8 @@ namespace nerp {
     struct nbRecipe;
 
     class nbRecipeDependenciesResolver;
+
+
 
     class nbOpenedProjectHandler : IObservable<nbProjectHandlerIObserver> {
     public:
